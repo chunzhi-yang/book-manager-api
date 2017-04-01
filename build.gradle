@@ -1,0 +1,100 @@
+apply plugin: 'java'
+apply plugin: 'war' //用来生成war
+apply plugin: 'eclipse-wtp' //用来生成Eclipseweb项目的插件（web-tool-platform）
+version = '1.0' //property
+ 
+// Uses JDK 7
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+ 
+ configurations {
+    mybatisGenerator
+}
+// 1. Get dependencies from Maven local repository
+// 2. Get dependencies from Maven central repository
+repositories {
+	mavenCentral()
+		maven { url 'http://mvn1.tools.vipshop.com/nexus/content/groups/public' }
+}
+ 
+//Project dependencies
+dependencies {
+	compile 'org.apache.tomcat:tomcat-servlet-api:8.0.24'  
+	compile 'org.springframework:spring-beans:4.2.5.RELEASE'
+	compile 'org.springframework:spring-jdbc:4.2.5.RELEASE'
+	compile 'org.springframework:spring-web:4.2.5.RELEASE' 
+	compile 'org.springframework:spring-tx:4.2.5.RELEASE'
+	compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
+    compile 'org.springframework:spring-orm:4.2.5.RELEASE'
+    compile 'org.springframework:spring-context-support:4.2.5.RELEASE' 	
+	compile 'org.springframework:spring-test:4.2.5.RELEASE' 
+	compile 'org.aspectj:aspectjweaver:1.8.6'
+	compile 'mysql:mysql-connector-java:5.1.36'
+	compile 'commons-dbcp:commons-dbcp:1.4'
+	compile 'org.mybatis:mybatis-spring:1.2.3'
+	compile 'org.mybatis:mybatis:3.3.0' 
+    compile 'tk.mybatis:mapper:3.3.8'
+	compile 'junit:junit:4.12' 
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.7.3'
+    compile 'org.aspectj:aspectjweaver:1.8.9'
+    compile 'commons-fileupload:commons-fileupload:1.3.1'
+    compile 'org.slf4j:slf4j-log4j12:1.7.21' 
+	compile 'org.apache.shiro:shiro-spring:1.3.0'
+	compile 'org.apache.shiro:shiro-core:1.3.0'
+	compile 'org.apache.shiro:shiro-web:1.3.0'
+	compile 'org.apache.shiro:shiro-cas:1.3.0'
+	compile 'org.apache.shiro:shiro-ehcache:1.3.0' 
+	compile 'commons-lang:commons-lang:2.6'
+	compile 'commons-io:commons-io:2.2'
+	compile 'commons-collections:commons-collections:3.2.1'
+	//include in compile only, exclude in the war
+	providedCompile 'javax.servlet:servlet-api:2.5'
+	
+    mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.2'
+    mybatisGenerator 'mysql:mysql-connector-java:5.1.38'
+    mybatisGenerator 'tk.mybatis:mapper:3.3.8'
+}
+
+def getDbProperties = {
+    def properties = new Properties()
+    file("src/main/resources/jdbc.properties").withInputStream { inputStream ->
+        properties.load(inputStream)
+    }
+    properties;
+}
+task mybatisGenerate << {
+    def prop = getDbProperties()
+
+    ant.properties['targetProject'] = projectDir.path
+    ant.properties['driverClass'] = prop.getProperty('driver')
+    ant.properties['connectionURL'] = prop.getProperty('url')
+    ant.properties['userId'] = prop.getProperty('username')
+    ant.properties['password'] = prop.getProperty('password')
+    ant.properties['src_main_java'] = sourceSets.main.java.srcDirs[0].path
+    ant.properties['src_main_resources'] = sourceSets.main.resources.srcDirs[0].path
+    ant.properties['modelPackage'] = this.modelPackage
+    ant.properties['mapperPackage'] = this.mapperPackage
+    ant.properties['sqlMapperPackage'] = this.sqlMapperPackage
+
+    ant.taskdef(
+            name: 'mbgenerator',
+            classname: 'org.mybatis.generator.ant.GeneratorAntTask',
+            classpath: configurations.mybatisGenerator.asPath
+    )
+    ant.mbgenerator(overwrite: true,
+            configfile: 'src/main/resources/mybatis/generator-config.xml', verbose: true) {
+        propertyset {
+            propertyref(name: 'targetProject')
+            propertyref(name: 'userId')
+            propertyref(name: 'driverClass')
+            propertyref(name: 'connectionURL')
+            propertyref(name: 'password')
+            propertyref(name: 'src_main_java')
+            propertyref(name: 'src_main_resources')
+            propertyref(name: 'modelPackage')
+            propertyref(name: 'mapperPackage')
+            propertyref(name: 'sqlMapperPackage')
+
+        }
+    }
+}
