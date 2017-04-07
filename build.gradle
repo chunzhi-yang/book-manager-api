@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'war' //用来生成war
 apply plugin: 'eclipse-wtp' //用来生成Eclipseweb项目的插件（web-tool-platform）
-version = '1.0' //property
+version = '1.0.0' //property
  
 // Uses JDK 7
 sourceCompatibility = 1.7
