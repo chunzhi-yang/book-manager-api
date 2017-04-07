@@ -49,9 +49,7 @@
         <javaClientGenerator targetPackage="${mapperPackage}" targetProject="${src_main_java}" type="XMLMAPPER" />
 
 
-        <table tableName="psp_user"  >
-            <generatedKey column="sys_user_id" sqlStatement="Mysql" identity="true"/>
-
+        <table tableName="%"  >             
         </table>
 
     </context>
