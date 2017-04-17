@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzhu.bm.repo.BookShelfMapper" >
+  <resultMap id="BaseResultMap" type="com.gzhu.bm.entity.BookShelf" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="book_shelf_id" property="bookShelfId" jdbcType="BIGINT" />
+    <result column="books_id" property="booksId" jdbcType="BIGINT" />
+    <result column="users_id" property="usersId" jdbcType="BIGINT" />
+    <result column="read_process" property="readProcess" jdbcType="DECIMAL" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>
