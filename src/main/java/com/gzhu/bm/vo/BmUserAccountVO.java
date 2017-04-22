@@ -1,44 +1,18 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
 import java.util.Date;
-import javax.persistence.*;
-
-@Table(name = "bm_user_account")
-public class BmUserAccount {
+ 
+public class BmUserAccountVO implements java.io.Serializable{
     /**
-     * 主键
-     */
-    @Id
-    @Column(name = "bm_user_account_id")
+	 * 
+	 */
+	private static final long serialVersionUID = 1L; 
     private Long bmUserAccountId;
-
-    /**
-     * uid
-     */
     private String uid;
-
-    /**
-     * 余额
-     */
-    private Long remain;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "created_time")
+    private Double remain;
     private Date createdTime;
-
-    /**
-     * 更新时间
-     */
-    @Column(name = "uodated_time")
     private Date uodatedTime;
 
-    /**
-     * 获取主键
-     *
-     * @return bm_user_account_id - 主键
-     */
     public Long getBmUserAccountId() {
         return bmUserAccountId;
     }
@@ -75,7 +49,7 @@ public class BmUserAccount {
      *
      * @return remain - 余额
      */
-    public Long getRemain() {
+    public Double getRemain() {
         return remain;
     }
 
@@ -84,7 +58,7 @@ public class BmUserAccount {
      *
      * @param remain 余额
      */
-    public void setRemain(Long remain) {
+    public void setRemain(Double remain) {
         this.remain = remain;
     }
 

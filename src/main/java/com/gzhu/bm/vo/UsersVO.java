@@ -1,71 +1,23 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
 import java.util.Date;
-import javax.persistence.*;
-
-@Table(name = "users")
-public class Users {
+ 
+public class UsersVO implements java.io.Serializable{
     /**
-     * 主键
-     */
-    @Id
-    @Column(name = "users_id")
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     private Long usersId;
-
-    /**
-     * 唯一标识
-     */
     private String uid;
-
-    /**
-     * 用户名
-     */
-    @Column(name = "user_name")
     private String userName;
-
-    /**
-     * 密码
-     */
-    @Column(name = "user_password")
     private String userPassword;
-
-    /**
-     * 性别0男1女
-     */
     private Byte sex;
-
-    /**
-     * 生日
-     */
     private Date birth;
-
-    /**
-     * 位置
-     */
     private String location;
-
-    /**
-     * 一句话描述
-     */
     private String description;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "created_time")
     private Date createdTime;
-
-    /**
-     * 头像img_id
-     */
-    @Column(name = "imgs_id")
     private Long imgsId;
 
-    /**
-     * 获取主键
-     *
-     * @return users_id - 主键
-     */
     public Long getUsersId() {
         return usersId;
     }

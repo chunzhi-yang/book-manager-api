@@ -1,33 +1,16 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
 import java.util.Date;
-import javax.persistence.*;
-
-@Table(name = "book_imgs")
-public class BookImgs {
+ 
+public class BookImgsVO implements java.io.Serializable{
     /**
-     * 主键ID
-     */
-    @Id
-    @Column(name = "imgs_id")
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     private Long imgsId;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "created_time")
     private Date createdTime;
-
-    /**
-     * 图片内容
-     */
     private String content;
-
-    /**
-     * 获取主键ID
-     *
-     * @return imgs_id - 主键ID
-     */
+    
     public Long getImgsId() {
         return imgsId;
     }

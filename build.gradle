@@ -47,6 +47,7 @@ dependencies {
 	compile 'commons-lang:commons-lang:2.6'
 	compile 'commons-io:commons-io:2.2'
 	compile 'commons-collections:commons-collections:3.2.1'
+	compile 'net.sf.dozer:dozer:5.0.4'
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
 	

@@ -1,70 +1,21 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import javax.persistence.*;
-
-@Table(name = "bm_order")
-public class BmOrder {
+import java.util.Date; 
+public class BmOrderVO implements java.io.Serializable{
     /**
-     * 主键
-     */
-    @Id
-    @Column(name = "bm_order_id")
+	 * 
+	 */
+	private static final long serialVersionUID = 1L; 
     private Long bmOrderId;
-
-    /**
-     * 0单章1全本
-     */
-    @Column(name = "order_type")
     private Byte orderType;
-
-    /**
-     * uid
-     */
     private String uid;
-
-    /**
-     * booksid
-     */
-    @Column(name = "books_id")
     private Long booksId;
-
-    /**
-     * 下单时间
-     */
-    @Column(name = "order_date")
     private Date orderDate;
-
-    /**
-     * 购买的章节数
-     */
-    @Column(name = "order_chapters")
     private Long orderChapters;
-
-    /**
-     * 费用
-     */
-    @Column(name = "order_fee")
-    private BigDecimal orderFee;
-
-    /**
-     * 支付时间
-     */
-    @Column(name = "pay_time")
+    private Double orderFee;
     private Date payTime;
-
-    /**
-     * 支付方式0微信1支付宝
-     */
-    @Column(name = "pay_type")
     private Byte payType;
 
-    /**
-     * 获取主键
-     *
-     * @return bm_order_id - 主键
-     */
     public Long getBmOrderId() {
         return bmOrderId;
     }
@@ -173,7 +124,7 @@ public class BmOrder {
      *
      * @return order_fee - 费用
      */
-    public BigDecimal getOrderFee() {
+    public Double getOrderFee() {
         return orderFee;
     }
 
@@ -182,7 +133,7 @@ public class BmOrder {
      *
      * @param orderFee 费用
      */
-    public void setOrderFee(BigDecimal orderFee) {
+    public void setOrderFee(Double orderFee) {
         this.orderFee = orderFee;
     }
 

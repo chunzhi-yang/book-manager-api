@@ -1,53 +1,20 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
 
-@Table(name = "book_shelf")
-public class BookShelf {
+public class BookShelfVO implements java.io.Serializable {
     /**
-     * 主键ID
-     */
-    @Id
-    @Column(name = "book_shelf_id")
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     private Long bookShelfId;
-
-    /**
-     * 图书ID
-     */
-    @Column(name = "books_id")
     private Long booksId;
-
-    /**
-     * 用户ID
-     */
-    @Column(name = "users_id")
     private Long usersId;
-
-    /**
-     * 阅读进度
-     */
-    @Column(name = "read_process")
-    private BigDecimal readProcess;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "created_time")
+    private Double readProcess;
     private Date createdTime;
-
-    /**
-     * 更新时间
-     */
-    @Column(name = "updated_time")
     private Date updatedTime;
 
-    /**
-     * 获取主键ID
-     *
-     * @return book_shelf_id - 主键ID
-     */
     public Long getBookShelfId() {
         return bookShelfId;
     }
@@ -102,7 +69,7 @@ public class BookShelf {
      *
      * @return read_process - 阅读进度
      */
-    public BigDecimal getReadProcess() {
+    public Double getReadProcess() {
         return readProcess;
     }
 
@@ -111,7 +78,7 @@ public class BookShelf {
      *
      * @param readProcess 阅读进度
      */
-    public void setReadProcess(BigDecimal readProcess) {
+    public void setReadProcess(Double readProcess) {
         this.readProcess = readProcess;
     }
 

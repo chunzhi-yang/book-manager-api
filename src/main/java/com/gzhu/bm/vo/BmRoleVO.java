@@ -1,45 +1,18 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
 import java.util.Date;
-import javax.persistence.*;
-
-@Table(name = "bm_role")
-public class BmRole {
+ 
+public class BmRoleVO implements java.io.Serializable{
     /**
-     * 主键
-     */
-    @Id
-    @Column(name = "bm_role_id")
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     private Long bmRoleId;
-
-    /**
-     * 角色编码
-     */
-    @Column(name = "role_code")
     private String roleCode;
-
-    /**
-     * 角色名称
-     */
-    @Column(name = "role_name")
     private String roleName;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "created_time")
     private Date createdTime;
-
-    /**
-     * 启用状态0启用1禁用
-     */
     private Byte status;
-
-    /**
-     * 获取主键
-     *
-     * @return bm_role_id - 主键
-     */
+    
     public Long getBmRoleId() {
         return bmRoleId;
     }

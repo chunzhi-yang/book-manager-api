@@ -1,61 +1,20 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
-import javax.persistence.*;
-
-@Table(name = "bm_menu")
-public class BmMenu {
+public class BmMenuVO implements java.io.Serializable{ 
     /**
-     * 主键
-     */
-    @Id
-    @Column(name = "bm_menu_id")
-    private Long bmMenuId;
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 角色编码
-     */
-    @Column(name = "menu_code")
-    private String menuCode;
-
-    /**
-     * url
-     */
+	private Long bmMenuId; 
+    private String menuCode; 
     private String url;
-
-    /**
-     * 逻辑url，angular
-     */
-    @Column(name = "logistic_url")
     private String logisticUrl;
-
-    /**
-     * 启用状态0启用1禁用
-     */
     private Byte status;
-
-    /**
-     * 菜单名称
-     */
-    @Column(name = "menu_name")
     private String menuName;
-
-    /**
-     * 权限控制
-     */
-    @Column(name = "is_under_control")
     private Byte isUnderControl;
-
-    /**
-     * 类型0菜单1功能
-     */
-    @Column(name = "menu_type")
     private Byte menuType;
-
-    /**
-     * 获取主键
-     *
-     * @return bm_menu_id - 主键
-     */
+    
     public Long getBmMenuId() {
         return bmMenuId;
     }

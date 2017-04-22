@@ -1,96 +1,28 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.vo;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
 
-@Table(name = "books")
-public class Books {
+ 
+public class BooksVO implements java.io.Serializable{
     /**
-     * 主键ID
-     */
-    @Id
-    @Column(name = "books_id")
+	 * 
+	 */
+	private static final long serialVersionUID = 1L; 
     private Long booksId;
-
-    /**
-     * 书名
-     */
-    @Column(name = "book_name")
     private String bookName;
-
-    /**
-     * 作者
-     */
     private String author;
-
-    /**
-     * 分类，还没定好
-     */
     private Byte category;
-
-    /**
-     * 简介
-     */
     private String description;
-
-    /**
-     * 是否需付费，按章节
-     */
-    private BigDecimal cost;
-
-    /**
-     * 缩略图id
-     */
-    @Column(name = "imgs_id")
+    private Double cost;
     private Long imgsId;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "created_time")
     private Date createdTime;
-
-    /**
-     * 更新时间
-     */
-    @Column(name = "updated_time")
     private Date updatedTime;
-
-    /**
-     * 是否已删除
-     */
-    @Column(name = "is_delete")
     private Byte isDelete;
-
-    /**
-     * 热门指数
-     */
-    @Column(name = "hot_score")
     private Long hotScore;
-
-    /**
-     * 免费章节
-     */
-    @Column(name = "free_chapters")
     private Long freeChapters;
-
-    /**
-     * 全本购买折扣
-     */
-    @Column(name = "order_discount")
-    private Short orderDiscount;
-
-    /**
-     * 图书内容
-     */
+    private Double orderDiscount;
     private String content;
-
-    /**
-     * 获取主键ID
-     *
-     * @return books_id - 主键ID
-     */
+    
     public Long getBooksId() {
         return booksId;
     }
@@ -181,7 +113,7 @@ public class Books {
      *
      * @return cost - 是否需付费，按章节
      */
-    public BigDecimal getCost() {
+    public Double getCost() {
         return cost;
     }
 
@@ -190,7 +122,7 @@ public class Books {
      *
      * @param cost 是否需付费，按章节
      */
-    public void setCost(BigDecimal cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 
@@ -307,7 +239,7 @@ public class Books {
      *
      * @return order_discount - 全本购买折扣
      */
-    public Short getOrderDiscount() {
+    public Double getOrderDiscount() {
         return orderDiscount;
     }
 
@@ -316,7 +248,7 @@ public class Books {
      *
      * @param orderDiscount 全本购买折扣
      */
-    public void setOrderDiscount(Short orderDiscount) {
+    public void setOrderDiscount(Double orderDiscount) {
         this.orderDiscount = orderDiscount;
     }
 
