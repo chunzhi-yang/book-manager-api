@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzhu.bm.repo.BmOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.gzhu.bm.entity.BmOrder" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="bm_order_id" property="bmOrderId" jdbcType="BIGINT" />
+    <result column="order_type" property="orderType" jdbcType="TINYINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="books_id" property="booksId" jdbcType="BIGINT" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="order_chapters" property="orderChapters" jdbcType="BIGINT" />
+    <result column="order_fee" property="orderFee" jdbcType="DECIMAL" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
+  </resultMap>
+</mapper>
