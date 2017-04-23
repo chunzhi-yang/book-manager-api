@@ -1,14 +1,19 @@
 package com.gzhu.bm.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
+import org.dozer.DozerBeanMapper;
+import org.springframework.stereotype.Service;
 
 import com.gzhu.bm.entity.Users;
 import com.gzhu.bm.repo.UsersMapper;
 import com.gzhu.bm.service.UsersService;
+import com.gzhu.bm.vo.UsersVO;
 
+@Service
 public class UsersServiceImpl implements UsersService {
 	
-	@Autowired
+	@Resource
 	private UsersMapper usersMapper;
 	
 	@Override
@@ -39,6 +44,12 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public Users findByAccountPassword(String account, String password) {
 		return usersMapper.findByAccountPassword(account, password);
+	}
+
+	@Override
+	public UsersVO findByAccount(String account) {
+		 Users user = usersMapper.findByAccount(account);
+		 return  new DozerBeanMapper().map(user, UsersVO.class);
 	}
 
 }

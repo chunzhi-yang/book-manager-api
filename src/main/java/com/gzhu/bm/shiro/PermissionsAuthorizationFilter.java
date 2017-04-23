@@ -3,7 +3,6 @@ package com.gzhu.bm.shiro;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
@@ -11,13 +10,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.core.JsonFactory;
  
 @Component("permission")
 public class PermissionsAuthorizationFilter extends AuthorizationFilter  {
@@ -31,27 +28,20 @@ public class PermissionsAuthorizationFilter extends AuthorizationFilter  {
 			
 			HttpServletRequest req = (HttpServletRequest) request;	
 			String uri = req.getRequestURI();		
-			uri=uri.replaceAll(req.getContextPath(),"");
-			
-			 
-			return false;		
+			uri=uri.replaceAll(req.getContextPath(),""); 
+		 
+			logger.info(uri);
+
+			boolean permitted = false;
+		//	subject.checkPermission(permission);
+			permitted = SecurityUtils.getSubject().isPermitted(uri);
+			return permitted;	
 		}catch(Exception e){
 			logger.error(e.toString(),e);
 			return false;
 		}		
 	}
-	
-	
-	
 	 
-	
-	@Cacheable("permissionCache")
-	private List<String> getAllPermission(){
-		 return null; 
-	}
-
-
-
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
 		HttpServletResponse resp=(HttpServletResponse) response;

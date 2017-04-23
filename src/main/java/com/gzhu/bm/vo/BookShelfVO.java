@@ -11,7 +11,7 @@ public class BookShelfVO implements java.io.Serializable {
     private Long bookShelfId;
     private Long booksId;
     private Long usersId;
-    private Double readProcess;
+    private BigDecimal readProcess;
     private Date createdTime;
     private Date updatedTime;
 
@@ -69,7 +69,7 @@ public class BookShelfVO implements java.io.Serializable {
      *
      * @return read_process - 阅读进度
      */
-    public Double getReadProcess() {
+    public BigDecimal getReadProcess() {
         return readProcess;
     }
 
@@ -78,7 +78,7 @@ public class BookShelfVO implements java.io.Serializable {
      *
      * @param readProcess 阅读进度
      */
-    public void setReadProcess(Double readProcess) {
+    public void setReadProcess(BigDecimal readProcess) {
         this.readProcess = readProcess;
     }
 

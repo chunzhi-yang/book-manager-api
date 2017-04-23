@@ -1,5 +1,6 @@
 package com.gzhu.bm.vo;
 
+import java.math.BigDecimal;
 import java.util.Date; 
 public class BmOrderVO implements java.io.Serializable{
     /**
@@ -12,7 +13,7 @@ public class BmOrderVO implements java.io.Serializable{
     private Long booksId;
     private Date orderDate;
     private Long orderChapters;
-    private Double orderFee;
+    private BigDecimal orderFee;
     private Date payTime;
     private Byte payType;
 
@@ -124,7 +125,7 @@ public class BmOrderVO implements java.io.Serializable{
      *
      * @return order_fee - 费用
      */
-    public Double getOrderFee() {
+    public BigDecimal getOrderFee() {
         return orderFee;
     }
 
@@ -133,7 +134,7 @@ public class BmOrderVO implements java.io.Serializable{
      *
      * @param orderFee 费用
      */
-    public void setOrderFee(Double orderFee) {
+    public void setOrderFee(BigDecimal orderFee) {
         this.orderFee = orderFee;
     }
 

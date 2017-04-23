@@ -1,5 +1,6 @@
 package com.gzhu.bm.vo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
  
@@ -13,14 +14,14 @@ public class BooksVO implements java.io.Serializable{
     private String author;
     private Byte category;
     private String description;
-    private Double cost;
+    private BigDecimal cost;
     private Long imgsId;
     private Date createdTime;
     private Date updatedTime;
     private Byte isDelete;
     private Long hotScore;
     private Long freeChapters;
-    private Double orderDiscount;
+    private Short orderDiscount;
     private String content;
     
     public Long getBooksId() {
@@ -113,7 +114,7 @@ public class BooksVO implements java.io.Serializable{
      *
      * @return cost - 是否需付费，按章节
      */
-    public Double getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
@@ -122,7 +123,7 @@ public class BooksVO implements java.io.Serializable{
      *
      * @param cost 是否需付费，按章节
      */
-    public void setCost(Double cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
@@ -239,7 +240,7 @@ public class BooksVO implements java.io.Serializable{
      *
      * @return order_discount - 全本购买折扣
      */
-    public Double getOrderDiscount() {
+    public Short getOrderDiscount() {
         return orderDiscount;
     }
 
@@ -248,7 +249,7 @@ public class BooksVO implements java.io.Serializable{
      *
      * @param orderDiscount 全本购买折扣
      */
-    public void setOrderDiscount(Double orderDiscount) {
+    public void setOrderDiscount(Short orderDiscount) {
         this.orderDiscount = orderDiscount;
     }
 

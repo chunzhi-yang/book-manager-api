@@ -1,5 +1,6 @@
 package com.gzhu.bm.vo;
 
+import java.math.BigDecimal;
 import java.util.Date;
  
 public class BmUserAccountVO implements java.io.Serializable{
@@ -9,7 +10,7 @@ public class BmUserAccountVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L; 
     private Long bmUserAccountId;
     private String uid;
-    private Double remain;
+    private BigDecimal remain;
     private Date createdTime;
     private Date uodatedTime;
 
@@ -49,7 +50,7 @@ public class BmUserAccountVO implements java.io.Serializable{
      *
      * @return remain - 余额
      */
-    public Double getRemain() {
+    public BigDecimal getRemain() {
         return remain;
     }
 
@@ -58,7 +59,7 @@ public class BmUserAccountVO implements java.io.Serializable{
      *
      * @param remain 余额
      */
-    public void setRemain(Double remain) {
+    public void setRemain(BigDecimal remain) {
         this.remain = remain;
     }
 

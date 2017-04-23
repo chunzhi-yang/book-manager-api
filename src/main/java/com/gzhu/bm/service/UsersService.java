@@ -1,6 +1,7 @@
 package com.gzhu.bm.service;
 
 import com.gzhu.bm.entity.Users;
+import com.gzhu.bm.vo.UsersVO;
 
 public interface UsersService {
 
@@ -15,4 +16,6 @@ public interface UsersService {
 	int updateByPrimaryKeySelective(Users record);
 
 	Users findByAccountPassword(String account,String password);
+
+	UsersVO findByAccount(String account);
 }

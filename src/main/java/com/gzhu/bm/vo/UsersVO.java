@@ -1,6 +1,7 @@
 package com.gzhu.bm.vo;
 
 import java.util.Date;
+import java.util.List;
  
 public class UsersVO implements java.io.Serializable{
     /**
@@ -17,8 +18,26 @@ public class UsersVO implements java.io.Serializable{
     private String description;
     private Date createdTime;
     private Long imgsId;
+    
+    private List<String> menus;
+    private List<String> roles;
+    public List<String> getMenus() {
+		return menus;
+	}
 
-    public Long getUsersId() {
+	public void setMenus(List<String> menus) {
+		this.menus = menus;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	public Long getUsersId() {
         return usersId;
     }
 
