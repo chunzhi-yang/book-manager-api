@@ -55,7 +55,7 @@ public class LoginController {
 	@RequestMapping(value="signin",method=RequestMethod.POST)
 	public ResponseEntity<String> login(HttpServletResponse resp,HttpServletRequest request,@RequestParam("username")String userName,@RequestParam("password")String password) throws Exception{
 		ResponseEntity<String> result = new ResponseEntity<String>("登录成功", HttpStatus.OK);		 
-		resp.setHeader("Access-Control-Allow-Origin", "*");
+		
 		Subject user = SecurityUtils.getSubject();		
 		ServletContext sct = request.getSession().getServletContext();   
 	    // 从上下文环境中通过属性名获取属私钥 
@@ -103,6 +103,7 @@ public class LoginController {
 		}
 		return new ResponseEntity<>("注册成功",HttpStatus.OK);
 	}
+	@CrossOrigin
 	@RequestMapping(value = "/getRSAPublicKey", method = RequestMethod.GET)	
 	public ResponseEntity<RSAPublicKeyVo> getRSAPublicKey(HttpServletRequest request) {
 		ServletContext sct = request.getSession().getServletContext();   
