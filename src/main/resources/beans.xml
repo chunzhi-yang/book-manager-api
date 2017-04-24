@@ -34,7 +34,7 @@
 	</context:component-scan>
 	
 	<!--  shiro的缓存管理 -->
-	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"></property>
     </bean>
 

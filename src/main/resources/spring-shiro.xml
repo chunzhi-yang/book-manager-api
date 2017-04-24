@@ -85,14 +85,13 @@
     </bean>
 
     <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
-        <property name="sessionIdGenerator" ref="idGen" />
-        <property name="activeSessionsCacheName" value="activeSessionsCache" />
+        <property name="sessionIdGenerator" ref="idGen" /> 
         <property name="cacheManager" ref="shiroCacheManager" />
     </bean>
     
     <!-- 定义授权缓存管理器 -->
  	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManager" ref="cacheManager"/>
+        <property name="cacheManager" ref="ehCacheManager"/>
     </bean> 
      
     
