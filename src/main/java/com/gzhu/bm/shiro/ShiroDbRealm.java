@@ -21,12 +21,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.gzhu.bm.entity.BmMenu;
-import com.gzhu.bm.entity.BmRole;
 import com.gzhu.bm.security.util.MD5Helper;
 import com.gzhu.bm.service.BmMenuService;
 import com.gzhu.bm.service.BmRoleService;
 import com.gzhu.bm.service.UsersService;
+import com.gzhu.bm.vo.BmMenuVO;
+import com.gzhu.bm.vo.BmRoleVO;
 import com.gzhu.bm.vo.UsersVO;
 
 @Component(value="systemAuthorizingRealm")
@@ -81,12 +81,12 @@ public class ShiroDbRealm extends AuthorizingRealm  {
 			} 
 			List<String> menus = new ArrayList<String>();
 			List<String> roles = new ArrayList<String>();
-			List<BmMenu> userMenus= bmMenuService.selectByUid(user.getUid());
-			List<BmRole> userRoles = bmRoleService.selectByUid(user.getUid());
-			for(BmMenu m:userMenus){
+			List<BmMenuVO> userMenus= bmMenuService.selectByUid(user.getUid());
+			List<BmRoleVO> userRoles = bmRoleService.selectByUid(user.getUid());
+			for(BmMenuVO m:userMenus){
 				menus.add(m.getUrl());
 			}
-			for(BmRole r:userRoles){
+			for(BmRoleVO r:userRoles){
 				roles.add(r.getRoleName());
 			}
 		}catch (Exception e) {

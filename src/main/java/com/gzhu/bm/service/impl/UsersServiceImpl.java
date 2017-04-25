@@ -16,9 +16,11 @@ public class UsersServiceImpl implements UsersService {
 	@Resource
 	private UsersMapper usersMapper;
 	
+	private DozerBeanMapper mapper;
+	
 	@Override
-	public int selectCount(Users users) {
-		return usersMapper.selectCount(users);
+	public int selectCount(UsersVO users) {
+		return usersMapper.selectCount(mapper.map(users,Users.class));
 	}
 
 	@Override
@@ -27,29 +29,31 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public Users selectByUid(String uid) {
-		return usersMapper.selectByUid(uid);
+	public UsersVO selectByUid(String uid) {
+		Users user =  usersMapper.selectByUid(uid);
+		return  mapper.map(user, UsersVO.class);
 	}
 
 	@Override
-	public int createSelective(Users users) {
-		return usersMapper.insertSelective(users);
+	public int createSelective(UsersVO users) {
+		return usersMapper.insertSelective(mapper.map(users, Users.class));
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(Users record) {		 
-		return usersMapper.updateByPrimaryKeySelective(record);
+	public int updateByPrimaryKeySelective(UsersVO record) {		 
+		return usersMapper.updateByPrimaryKeySelective(mapper.map(record,Users.class));
 	}
 
 	@Override
-	public Users findByAccountPassword(String account, String password) {
-		return usersMapper.findByAccountPassword(account, password);
+	public UsersVO findByAccountPassword(String account, String password) {
+		Users user =  usersMapper.findByAccountPassword(account, password);
+		return mapper.map(user, UsersVO.class);
 	}
 
 	@Override
 	public UsersVO findByAccount(String account) {
 		 Users user = usersMapper.findByAccount(account);
-		 return  new DozerBeanMapper().map(user, UsersVO.class);
+		 return  mapper.map(user, UsersVO.class);
 	}
 
 }

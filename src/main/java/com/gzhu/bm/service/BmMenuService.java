@@ -2,13 +2,13 @@ package com.gzhu.bm.service;
 
 import java.util.List;
 
-import com.gzhu.bm.entity.BmMenu;
 import com.gzhu.bm.repo.util.PaginationBean;
+import com.gzhu.bm.vo.BmMenuVO;
 
 public interface BmMenuService {
-	int selectCount(BmMenu bmMenu);
+	int selectCount(BmMenuVO bmMenu);
 
-	List<BmMenu> selectPage(BmMenu bmMenu,PaginationBean page);
+	List<BmMenuVO> selectPage(BmMenuVO bmMenu,PaginationBean page);
 
-	List<BmMenu> selectByUid(String uid); 
+	List<BmMenuVO> selectByUid(String uid); 
 }

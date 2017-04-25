@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gzhu.bm.entity.Users;
 import com.gzhu.bm.security.util.RSAUtil;
 import com.gzhu.bm.service.UsersService;
 import com.gzhu.bm.vo.RSAPublicKeyVo;
@@ -84,33 +84,34 @@ public class LoginController {
 		subject.logout(); 
 	}
 	
-	@RequestMapping(value="signup",method=RequestMethod.POST) 
-	public ResponseEntity<String> signup(HttpServletRequest request,@ModelAttribute UsersVO usersVo)throws Exception{
-		try{
-			Users users = mapper.map(usersVo,Users.class);
+	@RequestMapping(value="signup",method=RequestMethod.POST)  
+	public ResponseEntity<String> signup(HttpServletRequest request,@RequestParam("userName")String userName,@RequestParam("userPassword")String password)throws Exception{
+		try{ 
 			ServletContext sct = request.getSession().getServletContext();   
 		    // 从上下文环境中通过属性名获取属私钥 
 			RSAPrivateKey privateKey = (RSAPrivateKey) sct.getAttribute(PRIVATEKEY);
 			if(privateKey == null){
 				throw new Exception("后台获取私钥操失败，请刷新页面");
 			}
-			String password =RSAUtil.decryptByPrivateKey(users.getUserPassword(), privateKey);
-			users.setUserPassword(password);
-			usersService.createSelective(users); 
+			String userPassword =RSAUtil.decryptByPrivateKey(password, privateKey);
+			UsersVO usersVo = new UsersVO();
+			usersVo.setUserName(userName);
+			usersVo .setUserPassword(userPassword);
+			usersService.createSelective(usersVo); 
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			throw e;
 		}
 		return new ResponseEntity<>("注册成功",HttpStatus.OK);
 	}
-	@CrossOrigin
-	@RequestMapping(value = "/getRSAPublicKey", method = RequestMethod.GET)	
-	public ResponseEntity<RSAPublicKeyVo> getRSAPublicKey(HttpServletRequest request) {
+	 
+	@RequestMapping(value = "/getRSAPublicKey", method = RequestMethod.GET) 
+	public RSAPublicKeyVo getRSAPublicKey(HttpServletRequest request) {
 		ServletContext sct = request.getSession().getServletContext();   
 	    // 从上下文环境中通过属性名获取属性值  
         RSAPublicKeyVo publicKeyVo = (RSAPublicKeyVo) sct.getAttribute(PUBLICKEYVO);
 		
-		return new ResponseEntity<>(publicKeyVo, HttpStatus.OK);
+		return publicKeyVo;
 	}
 	 
 	@RequestMapping(value = "/getCaptchaS", method = RequestMethod.GET)	

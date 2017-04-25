@@ -30,12 +30,9 @@
         <property name="securityManager" ref="securityManager" />   
         <property name="filterChainDefinitions">  
             <value>  
-                /login.jsp = anon  
-                /index.jsp = anon
-                /error/403.jsp = anon  
-                /login/success = anon  
-                /*.jsp = authc 
-                /login.logout = logout 
+                /login/* = anon               
+                /login/success = anon
+                /login.logout = logout
                 /** = authc  
             </value>  
         </property>   

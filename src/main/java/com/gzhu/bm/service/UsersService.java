@@ -1,21 +1,20 @@
 package com.gzhu.bm.service;
 
-import com.gzhu.bm.entity.Users;
 import com.gzhu.bm.vo.UsersVO;
 
 public interface UsersService {
 
-	int selectCount(Users users);
+	int selectCount(UsersVO users);
 
 	int deleteById(Integer id);
 
-	Users selectByUid(String uid);
+	UsersVO selectByUid(String uid);
 	 
-	int createSelective(Users users); 
+	int createSelective(UsersVO users); 
 	
-	int updateByPrimaryKeySelective(Users record);
+	int updateByPrimaryKeySelective(UsersVO record);
 
-	Users findByAccountPassword(String account,String password);
+	UsersVO findByAccountPassword(String account,String password);
 
 	UsersVO findByAccount(String account);
 }

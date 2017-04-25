@@ -17,4 +17,5 @@ public interface BmAccountLogMapper extends Mapper<BmAccountLog> {
 
     List<BmAccountLog> selectByPage(BmAccountLog bmAccountLog,@Param("page")PaginationBean page);
  
+    List<BmAccountLog> selectByUid(String uid);
 }

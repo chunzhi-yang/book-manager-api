@@ -16,7 +16,7 @@
     <param-value>classpath:/beans.xml</param-value>
   </context-param>
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>com.gzhu.bm.base.SelfContextLoaderListener</listener-class>
   </listener>
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>

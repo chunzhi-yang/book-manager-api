@@ -2,13 +2,13 @@ package com.gzhu.bm.service;
 
 import java.util.List;
 
-import com.gzhu.bm.entity.BmRole;
 import com.gzhu.bm.repo.util.PaginationBean;
+import com.gzhu.bm.vo.BmRoleVO;
 
 public interface BmRoleService {
-	List<BmRole> selectByUid(String uid); 
+	List<BmRoleVO> selectByUid(String uid); 
 	    
-	int selectCount(BmRole record);
+	int selectCount(BmRoleVO record);
 	    
-	List<BmRole> selectPage(BmRole record,PaginationBean page);
+	List<BmRoleVO> selectPage(BmRoleVO record,PaginationBean page);
 }

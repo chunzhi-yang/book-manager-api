@@ -1,4 +1,4 @@
-package com.gzhu.bm.entity;
+package com.gzhu.bm.base;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;

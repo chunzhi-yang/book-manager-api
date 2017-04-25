@@ -13,4 +13,14 @@
     <result column="change_time" property="changeTime" jdbcType="TIMESTAMP" />
     <result column="pay_type" property="payType" jdbcType="TINYINT" />
   </resultMap>
+  <sql id="Base_Column_List">
+  	`bm_account_log_id`,
+  	`uid`,
+  	`change_type`,
+  	`before_remain`,
+  	`after_remain`,
+  	`change_time`,
+  	`pay_type`
+  </sql>
+   
 </mapper>
