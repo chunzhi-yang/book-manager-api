@@ -16,7 +16,7 @@ public class UsersServiceImpl implements UsersService {
 	@Resource
 	private UsersMapper usersMapper;
 	
-	private DozerBeanMapper mapper;
+	private DozerBeanMapper mapper = new DozerBeanMapper();
 	
 	@Override
 	public int selectCount(UsersVO users) {

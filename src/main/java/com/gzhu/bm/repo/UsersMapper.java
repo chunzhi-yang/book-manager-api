@@ -9,7 +9,7 @@ import tk.mybatis.mapper.common.Mapper;
 @MapperScan 
 public interface UsersMapper extends Mapper<Users> {
     
-	int selectCount(Users users); 
+	int selectCount(@Param("record")Users users); 
     
     Users selectByUid(String uid);  
     

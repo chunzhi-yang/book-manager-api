@@ -21,7 +21,15 @@ public class UsersVO implements java.io.Serializable{
     
     private List<String> menus;
     private List<String> roles;
-    public List<String> getMenus() {
+    
+    @Override
+	public String toString() {
+		return "UsersVO [usersId=" + usersId + ", uid=" + uid + ", userName=" + userName + ", userPassword="
+				+ userPassword + ", sex=" + sex + ", birth=" + birth + ", location=" + location + ", description="
+				+ description + ", createdTime=" + createdTime + ", imgsId=" + imgsId + "]";
+	}
+
+	public List<String> getMenus() {
 		return menus;
 	}
 

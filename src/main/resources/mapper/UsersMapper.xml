@@ -16,4 +16,66 @@
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="imgs_id" property="imgsId" jdbcType="BIGINT" />
   </resultMap>
+  <sql id="BaseColumns">
+  	`users_id`,
+  	`uid`,
+  	`user_name`,
+  	`user_password`,
+  	`sex`,
+  	`birth`,
+  	`location`,
+  	`description`,
+  	`created_time`,
+  	`imgs_id`
+  </sql>
+ 
+  <sql id="usersQueryParams">
+  		<if test="record.usersId != null">
+  			users_id = #{record.usersId,jdbcType=BIGINT},
+  		</if>
+  		<if test="record.uid != null">
+  			uid= #{record.uid,jdbcType=VARCHAR},
+  		</if>
+  		<if test="record.userName != null">
+  			user_name = #{record.userName,jdbcType=VARCHAR},
+  		</if>
+  		<if test="record.userPassword != null">
+  			user_password =#{record.userPassword,jdbcType=VARCHAR},
+  		</if>
+  		<if test="record.sex != null">
+  			sex = #{record.sex,jdbcType=TINYINT},
+  		</if>
+  		<if test="record.birth != null">
+  			birth = #{record.birth,jdbcType=TIMESTAMP},
+  		</if>
+  		<if test="record.location != null">
+  			location = #{record.location,jdbcType=VARCHAR},
+  		</if>
+  		<if test="record.description != null">
+  			description = #{record.description,jdbcType=VARCHAR},
+  		</if>
+  		<if test="record.created_time != null">
+  			created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+  		</if>
+  		<if test="record.imgs_id != null">
+  			imgs_id = #{record.imgsId,jdbcType=BIGINT},
+  		</if>
+  </sql>
+  <select id="selectCount">
+  		select count(*) from users
+  		<where>
+  			<include refid="usersQueryParams"></include>
+  		</where>
+  </select>
+  <select id="selectByUid">
+  		select * from users where uid=#{uid,jdbcType=VARCHAR}
+  </select>
+   <select id="findByAccountPassword">
+  		select * from users where
+  		 user_name=#{account,jdbcType=VARCHAR} 
+  		 and user_password=#{userPassword,jdbcType=VARCHAR} 
+  </select>
+   <select id="findByAccount">
+  		select * from users  where user_name=#{account,jdbcType=VARCHAR} 
+  </select>
 </mapper>
