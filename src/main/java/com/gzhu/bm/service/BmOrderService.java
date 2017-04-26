@@ -11,8 +11,12 @@ public interface BmOrderService {
 	
 	BmOrderVO selectById(long id);
 	
-	List<BmOrderVO> selectPage(BmOrderVO bmOrder,PaginationBean page);
+	List<BmOrderVO> selectPage(BmOrderVO bmOrder,PaginationBean<BmOrderVO> page);
 	
 	int selectCount(BmOrderVO bmOrder);
+
+	Integer updateOrder(BmOrderVO bmOrderVO);
+
+	Integer deleteById(Long id);
 	 
 }

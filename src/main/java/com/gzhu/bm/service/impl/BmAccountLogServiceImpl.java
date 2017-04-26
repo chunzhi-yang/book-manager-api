@@ -2,8 +2,13 @@ package com.gzhu.bm.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
+import com.gzhu.bm.entity.BmAccountLog;
+import com.gzhu.bm.repo.BmAccountLogMapper;
 import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmAccountLogService;
 import com.gzhu.bm.vo.BmAccountLogVO;
@@ -11,32 +16,31 @@ import com.gzhu.bm.vo.BmAccountLogVO;
 @Service
 public class BmAccountLogServiceImpl implements BmAccountLogService {
 
+	@Resource
+	BmAccountLogMapper bmAccountLogMapper;
+	private DozerBeanMapper mapper = new DozerBeanMapper();
 	@Override
 	public int createSelective(BmAccountLogVO bmAccountLog) {
-		// TODO Auto-generated method stub
-		return 0;
+		return bmAccountLogMapper.insertSelective(mapper.map(bmAccountLog,BmAccountLog.class));
 	}
 
 	@Override
 	public List<BmAccountLogVO> selectByUid(String uid) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public BmAccountLogVO selectById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.map(bmAccountLogMapper.selectByPrimaryKey(id),BmAccountLogVO.class);
 	}
 
 	@Override
 	public int selectCount(BmAccountLogVO bmAccountLog) {
-		// TODO Auto-generated method stub
-		return 0;
+		return bmAccountLogMapper.selectCount(mapper.map(bmAccountLog,BmAccountLog.class));
 	}
 
 	@Override
-	public List<BmAccountLogVO> selectPage(BmAccountLogVO bmAccountLog, PaginationBean page) {
+	public List<BmAccountLogVO> selectPage(BmAccountLogVO bmAccountLog, PaginationBean<BmAccountLogVO> page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -16,7 +16,7 @@ public class BmAccountLog {
     /**
      * uid
      */
-    private Long uid;
+    private String uid;
 
     /**
      * 变动类型0充值1支付
@@ -71,7 +71,7 @@ public class BmAccountLog {
      *
      * @return uid - uid
      */
-    public Long getUid() {
+    public String getUid() {
         return uid;
     }
 
@@ -80,7 +80,7 @@ public class BmAccountLog {
      *
      * @param uid uid
      */
-    public void setUid(Long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

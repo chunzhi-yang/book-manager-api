@@ -8,11 +8,13 @@ import com.gzhu.bm.vo.BooksVO;
 
 public interface BookShelfService {
 	
-	List<BooksVO> selectByUid(String uid,PaginationBean page);
+	List<BooksVO> selectByUid(String uid,PaginationBean<BooksVO> page);
 	
 	int createSelective(BookShelfVO bookShelf);
 	
 	int deleteById(long id);
 	
 	int CreateBatch(List<BookShelfVO> bookShelfs);
+
+	int selectCount(String uid);
 }

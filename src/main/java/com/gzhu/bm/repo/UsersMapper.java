@@ -11,10 +11,10 @@ public interface UsersMapper extends Mapper<Users> {
     
 	int selectCount(@Param("record")Users users); 
     
-    Users selectByUid(String uid);  
+    Users selectByUid(@Param("uid")String uid);  
     
-    Users findByAccountPassword(@Param("account")String account,@Param("userPassword") String password);
+    Users findByAccountPassword(@Param("userName")String account,@Param("userPassword") String password);
 
-	Users findByAccount(String account);
+	Users findByAccount(@Param("userName")String account);
  
 }

@@ -72,10 +72,10 @@
   </select>
    <select id="findByAccountPassword">
   		select * from users where
-  		 user_name=#{account,jdbcType=VARCHAR} 
+  		 user_name=#{userName,jdbcType=VARCHAR} 
   		 and user_password=#{userPassword,jdbcType=VARCHAR} 
   </select>
    <select id="findByAccount">
-  		select * from users  where user_name=#{account,jdbcType=VARCHAR} 
+  		select * from users  where user_name=#{userName,jdbcType=VARCHAR} 
   </select>
 </mapper>

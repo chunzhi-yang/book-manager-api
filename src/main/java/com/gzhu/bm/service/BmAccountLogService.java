@@ -15,5 +15,5 @@ public interface BmAccountLogService {
 	
 	int selectCount(BmAccountLogVO bmAccountLog);
 	
-	List<BmAccountLogVO> selectPage(BmAccountLogVO bmAccountLog,PaginationBean page);
+	List<BmAccountLogVO> selectPage(BmAccountLogVO bmAccountLog,PaginationBean<BmAccountLogVO> page);
 }

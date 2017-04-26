@@ -9,4 +9,7 @@
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
+  <select id="selectByBookId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select * from book_imgs where books_id = #{booksId}
+  </select>
 </mapper>

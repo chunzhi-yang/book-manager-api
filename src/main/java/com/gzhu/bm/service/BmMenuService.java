@@ -8,7 +8,11 @@ import com.gzhu.bm.vo.BmMenuVO;
 public interface BmMenuService {
 	int selectCount(BmMenuVO bmMenu);
 
-	List<BmMenuVO> selectPage(BmMenuVO bmMenu,PaginationBean page);
+	List<BmMenuVO> selectPage(BmMenuVO bmMenu,PaginationBean<BmMenuVO> page);
 
-	List<BmMenuVO> selectByUid(String uid); 
+	List<BmMenuVO> selectByUid(String uid);
+
+	Integer createSelective(BmMenuVO bmOrderVO);
+
+	Integer updateMenu(BmMenuVO bmOrderVO); 
 }

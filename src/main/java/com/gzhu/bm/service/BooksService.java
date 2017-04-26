@@ -14,4 +14,6 @@ public interface BooksService {
 	List<BooksVO> selectPage(BooksVO books,PaginationBean page);
 	
 	int selectCount(BooksVO books);
+
+	Integer update(BooksVO booksVO);
 }

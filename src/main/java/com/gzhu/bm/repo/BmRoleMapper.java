@@ -12,9 +12,9 @@ import tk.mybatis.mapper.common.Mapper;
 @MapperScan
 public interface BmRoleMapper extends Mapper<BmRole> { 
 
-    List<BmRole> selectByUid(String uid); 
+    List<BmRole> selectByUid(@Param("uid")String uid); 
     
-    int selectCount(BmRole record);
+    int selectCount(@Param("record")BmRole record);
     
     List<BmRole> selectPage(@Param("record") BmRole record,@Param("page")PaginationBean page);
 }

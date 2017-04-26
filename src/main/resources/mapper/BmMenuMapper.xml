@@ -14,4 +14,57 @@
     <result column="is_under_control" property="isUnderControl" jdbcType="TINYINT" />
     <result column="menu_type" property="menuType" jdbcType="TINYINT" />
   </resultMap>
+  <sql id="Base_Columns">
+  	`bm_menu_id`,
+  	`menu_code`,
+  	`url`,
+  	`logistic_url`,
+  	`status`,
+  	`menu_name`,
+  	`is_under_control`,
+  	`menu_type`
+  </sql>
+  <sql id="queryParams">
+  	<where>
+  		1=1
+  	  <if test="record.bmMenuId != null">
+  	  	and bm_menu_id = #{record.bmMenuId,jdbcType=BIGINT}
+  	  </if>
+  	  <if test="record.menuCode != null">
+  	  	and menu_code = #{record.menuCode,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="record.url != null">
+  	  	and url = #{record.url,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="record.logisticUrl != null">
+  	  	and logistic_url = #{record.logisticUrl,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="record.status != null">
+  	  	and status = #{record.status,jdbcType=TINYINT}
+  	  </if>
+  	  <if test="record.menuName != null">
+  	  	and menu_name = #{record.menuName,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="record.bmMenuId != null">
+  	  	and is_under_control = #{record.isUnderControl,jdbcType=TINYINT}
+  	  </if>
+  	  <if test="record.menuType != null">
+  	  	and menu_type = #{record.menuType,jdbcType=TINYINT}
+  	  </if>
+  	</where>
+  </sql>
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from bm_menu
+  	<include refid="queryParams"></include>
+  </select>
+  <select id="selectPage" resultMap="BaseResultMap">
+  	select <include refid="Base_Columns"></include> from bm_menu
+  	<include refid="queryParams"></include>
+  	limit #{(page.page-1)*page.pageSize},#{page.pageSize}
+  </select>
+   <select id="selectByUid" resultMap="BaseResultMap" >
+  	select <include refid="Base_Columns"></include> from bm_menu
+  	<include refid="queryParams"></include>
+  	limit #{(page.page-1)*page.pageSize},#{page.pageSize}
+  </select>
 </mapper>

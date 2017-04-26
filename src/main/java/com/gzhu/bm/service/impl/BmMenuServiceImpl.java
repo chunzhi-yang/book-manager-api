@@ -47,4 +47,14 @@ public class BmMenuServiceImpl implements BmMenuService {
 		return result;
 	}
 
+	@Override
+	public Integer createSelective(BmMenuVO bmOrderVO) {
+		return bmMenuMapper.insertSelective(mapper.map(bmOrderVO,BmMenu.class));
+	}
+
+	@Override
+	public Integer updateMenu(BmMenuVO bmOrderVO) {
+		return bmMenuMapper.updateByPrimaryKeySelective(mapper.map(bmOrderVO,BmMenu.class));
+	}
+
 }

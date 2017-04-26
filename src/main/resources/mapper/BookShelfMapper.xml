@@ -12,4 +12,11 @@
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <select id="selectCountByUid" resultType="java.lang.Integer" parameterType="java.lang.String">
+  	select count(1) from book_shelf where uid=#{uid}
+  </select>
+    <select id="selectByUid" resultMap="BaseResultMap">
+  	select * from book_shelf where uid=#{uid} 
+  	limit #{page.pageSize*(page.page-1)},#{page.pageSize}
+  </select>
 </mapper>

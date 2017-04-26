@@ -12,9 +12,9 @@ import tk.mybatis.mapper.common.Mapper;
 @MapperScan
 public interface BmMenuMapper extends Mapper<BmMenu> {
 	
-    int selectCount(BmMenu bmMenu); 
+    int selectCount(@Param("record")BmMenu bmMenu); 
 
     List<BmMenu> selectPage(@Param("record")BmMenu bmMenu,@Param("page")PaginationBean page);
     
-    List<BmMenu> selectByUid(String uid); 
+    List<BmMenu> selectByUid(@Param("uid")String uid); 
 }

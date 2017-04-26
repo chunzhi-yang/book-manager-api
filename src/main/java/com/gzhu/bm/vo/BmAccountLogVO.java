@@ -10,7 +10,7 @@ public class BmAccountLogVO implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long bmAccountLogId;
-	private Long uid;
+	private String uid;
 	private Byte changeType;
 	private BigDecimal beforeRemain;
 	private BigDecimal afterRemain;
@@ -23,10 +23,10 @@ public class BmAccountLogVO implements java.io.Serializable{
 	public void setBmAccountLogId(Long bmAccountLogId) {
 		this.bmAccountLogId = bmAccountLogId;
 	}
-	public Long getUid() {
+	public String getUid() {
 		return uid;
 	}
-	public void setUid(Long uid) {
+	public void setUid(String uid) {
 		this.uid = uid;
 	}
 	public Byte getChangeType() {

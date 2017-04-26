@@ -20,4 +20,52 @@
     <result column="order_discount" property="orderDiscount" jdbcType="DECIMAL" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
+  <sql id="queryParams">
+  	<where>
+  		is_delete=0
+  		<if test="record.booksId != null">
+  			and books_id=#{record.booksId,jdbcType=BIGINT}
+  		</if>
+  		<if test="record.bookName != null">
+  			and book_name=#{record.bookName,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.author != null">
+  			and author=#{record.author,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.category != null">
+  			and category=#{record.category,jdbcType=TINYINT}
+  		</if>
+  		<if test="record.description != null">
+  			and description=#{record.description,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.cost != null">
+  			and cost=#{record.cost,jdbcType=DECIMAL}
+  		</if>
+  		<if test="record.imgsId != null">
+  			and imgs_id=#{record.imgsId,jdbcType=BIGINT}
+  		</if>
+  		<if test="record.createdTime != null">
+  			and created_time=#{record.createdTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="record.updatedTime != null">
+  			and updated_time=#{record.updatedTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="record.hotScore != null">
+  			and hot_score=#{record.hotScore,jdbcType=BIGINT}
+  		</if>
+  		<if test="record.orderDiscount != null">
+  			and order_discount=#{record.orderDiscount,jdbcType=DECIMAL}
+  		</if>
+  		<if test="record.freeChapters != null">
+  			and free_chapters=#{record.freeChapters,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </sql>
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from books <include refid="queryParams"></include>
+  </select>
+  <select id="selectPage" resultMap="BaseResultMap">
+  	select * from books <include refid="queryParams"></include>
+  	limit #{page.pageSize*(page.page-1)},#{page.pageSize}
+  </select>
 </mapper>

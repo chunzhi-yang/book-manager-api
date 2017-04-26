@@ -2,7 +2,7 @@ package com.gzhu.bm.repo.util;
 
 import java.util.List;
 
-public class PaginationBean {
+public class PaginationBean<T> {
 	
 	private int page;
 	
@@ -12,6 +12,16 @@ public class PaginationBean {
 	
 	private List<SortBean> order;
 	
+	private List<T> data;
+	
+	public List<T> getData() {
+		return data;
+	}
+
+	public void setData(List<T> data) {
+		this.data = data;
+	}
+
 	public PaginationBean(int page,int pageSize,int total){
 		this.page = page;
 		this.pageSize = pageSize;

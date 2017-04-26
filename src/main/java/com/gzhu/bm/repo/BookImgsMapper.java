@@ -8,6 +8,6 @@ import tk.mybatis.mapper.common.Mapper;
 @MapperScan
 public interface BookImgsMapper extends Mapper<BookImgs> { 
 	
-    BookImgs selectByBookId(Integer bookId);
+    BookImgs selectByBookId(Integer booksId);
  
 }

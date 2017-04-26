@@ -13,9 +13,9 @@ import tk.mybatis.mapper.common.Mapper;
 @MapperScan
 public interface BmAccountLogMapper extends Mapper<BmAccountLog> {
 	
-    int selectCount(BmAccountLog bmAccountLog); 
+    int selectCount(@Param("record")BmAccountLog bmAccountLog); 
 
-    List<BmAccountLog> selectByPage(BmAccountLog bmAccountLog,@Param("page")PaginationBean page);
+    List<BmAccountLog> selectByPage(@Param("record")BmAccountLog bmAccountLog,@Param("page")PaginationBean page);
  
-    List<BmAccountLog> selectByUid(String uid);
+    List<BmAccountLog> selectByUid(@Param("uid")String uid);
 }
