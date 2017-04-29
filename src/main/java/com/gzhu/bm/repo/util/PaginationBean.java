@@ -2,8 +2,14 @@ package com.gzhu.bm.repo.util;
 
 import java.util.List;
 
-public class PaginationBean<T> {
+public class PaginationBean<T> implements java.io.Serializable {
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int page;
 	
 	private int pageSize;

@@ -30,7 +30,8 @@
   			and role_name = #{record.roleName,jdbcType=VARCHAR}
   		</if>
   		 
-  	</where>
+  	  </where>
+  	</sql>
   	<select id="selectCount" resultType="java.lang.Integer">
   		select count(*) from bm_role
   		<include refid="queryParams"></include>
@@ -38,10 +39,10 @@
   	<select id="selectPage" resultMap="BaseResultMap">
   		select* from bm_role
   		<include refid="queryParams"></include>
-  		limit #{(page.page-1)*page.pageSize},#{page.pageSize}
+  		limit ${page.pageSize*(page.page -1)},${page.pageSize}
   	</select>
   	<select id="selectByUid" resultMap="BaseResultMap">
   		select* from bm_role where uid=#{uid}
   	</select>
-  </sql>
+  
 </mapper>

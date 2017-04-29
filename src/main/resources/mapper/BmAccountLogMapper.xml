@@ -25,38 +25,38 @@
   <sql id="queryParams">
   	<where>
   		1=1 	
-  	 <if test="record.bmAccountLogId == null">
+  	 <if test="record.bmAccountLogId != null">
   	 	and bm_account_log_id = #{record.bmAccountLogId,jdbcType=BIGINT}
   	 </if>	
-  	 <if test="record.uid == null">
+  	 <if test="record.uid != null">
   	 	and uid = #{record.uid,jdbcType=VARCHAR}
   	 </if>	
-  	 <if test="record.changeType == null">
+  	 <if test="record.changeType != null">
   	 	and change_type = #{record.changeType,jdbcType=TINYINT}
   	 </if>	
-  	 <if test="record.beforeRemain == null">
+  	 <if test="record.beforeRemain != null">
   	 	and before_remain = #{record.beforeRemain,jdbcType=DECIMAL}
   	 </if>	
-  	 <if test="record.afterRemain == null">
+  	 <if test="record.afterRemain != null">
   	 	and after_remain = #{record.afterRemain,jdbcType=DECIMAL}
   	 </if>	
-  	 <if test="record.changeTime == null">
+  	 <if test="record.changeTime != null">
   	 	and change_time = #{record.changeTime,jdbcType=TIMESTAMP}
   	 </if>	
-  	 <if test="record.payType == null">
+  	 <if test="record.payType != null">
   	 	and pay_type = #{record.payType,jdbcType=BIGINT}
   	 </if>	
   	 </where>
   </sql>
   <select id="selectCount" resultType="java.lang.Integer">
   	select count(*) from bm_account_log
-  	<include refid="queryParams"></include>
+   <include refid="queryParams"></include>  	 
   </select> 
-  <select id="selectPage" resultMap="BaseResultMap">
+  <select id="selectByPage" resultMap="BaseResultMap">
   	select <include refid="Base_Column_List"></include>
   	from bm_account_log
   	<include refid="queryParams"></include>
-  	limit #{(page.page-1)*page.pageSize},#{page.pageSize}
+  	limit ${page.pageSize*(page.page -1)},${page.pageSize}
   </select>
   <select id="selectByUid" resultMap="BaseResultMap">
   	select <include refid="Base_Column_List"></include>

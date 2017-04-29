@@ -12,8 +12,7 @@
     <result column="uodated_time" property="uodatedTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="queryParams">
-  	<where>
-  	1=1
+  	 
   		<if test="record.bmUserAccountId != null">
   			and bm_user_account_id =#{record.bmUserAccountId,jdbcType=BIGINT}
   		</if>
@@ -29,16 +28,13 @@
   		<if test="record.uodatedTime != null">
   			and uodated_time =#{record.uodatedTime,jdbcType=TIMESTAMP}
   		</if>
-  	</where>
+  	 
   </sql>
-  <select id="selectCount" resultType="java.lang.Integer">
-  	select count(1) from bm_user_account 
-  	<include refid="queryParams"></include>
-  </select>
+ 
    <select id="selectPage" resultMap="BaseResultMap">
-  	select * from bm_user_account 
+  	select * from bm_user_account where 1=1
   	<include refid="queryParams"></include>
-  	limit #{page.pageSize*(page.page-1)},#{page.pageSize}
+  limit ${page.pageSize*(page.page -1)},${page.pageSize}
   </select>
     <select id="selectByUid" resultMap="BaseResultMap">
   	select * from bm_user_account where uid=#{uid}

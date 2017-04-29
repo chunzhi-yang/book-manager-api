@@ -47,7 +47,7 @@ public class BookShelfController {
 	
 	@RequestMapping(value="createBatch",method=RequestMethod.POST)
 	public ResponseEntity<Integer> create(@ModelAttribute List<BookShelfVO> BookShelfVOList){
-		Integer result = bookShelfService.CreateBatch(BookShelfVOList);
+		Integer result = bookShelfService.createBatch(BookShelfVOList);
 		return new ResponseEntity<>(result,result.intValue()>0?HttpStatus.OK:HttpStatus.SERVICE_UNAVAILABLE);
 	}
 	

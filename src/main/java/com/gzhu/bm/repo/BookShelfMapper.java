@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.gzhu.bm.entity.BookShelf;
+import com.gzhu.bm.entity.Books;
 import com.gzhu.bm.repo.util.PaginationBean;
+import com.gzhu.bm.vo.BooksVO;
 
 import tk.mybatis.mapper.common.Mapper;
 @MapperScan
@@ -14,5 +16,8 @@ public interface BookShelfMapper extends Mapper<BookShelf> {
 	
     int selectCountByUid(String uid); 
 
-    List<BookShelf> selectByUid(@Param("uid")String uid,@Param("page")PaginationBean page); 
+    List<Books> selectByUid(@Param("uid")String uid,@Param("page")PaginationBean<BooksVO> page);
+
+	int createBatch(List<BookShelf> mapList); 
+	 
 }

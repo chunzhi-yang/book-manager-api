@@ -7,4 +7,6 @@ public interface BookImgsService {
 	int createSelective(BookImgsVO bookImgs); 
 	
 	BookImgsVO selectById(long id);
+
+	Integer updateImg(BookImgsVO bookImgsVO);
 }

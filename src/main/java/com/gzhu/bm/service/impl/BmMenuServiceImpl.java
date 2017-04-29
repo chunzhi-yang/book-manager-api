@@ -5,13 +5,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import com.gzhu.bm.entity.BmMenu;
 import com.gzhu.bm.repo.BmMenuMapper;
 import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmMenuService;
+import com.gzhu.bm.util.BeanMapper;
 import com.gzhu.bm.vo.BmMenuVO;
 
 @Service
@@ -20,19 +20,19 @@ public class BmMenuServiceImpl implements BmMenuService {
 	@Resource
 	private BmMenuMapper bmMenuMapper;
 	
-	private DozerBeanMapper mapper;
+ 
 	
 	@Override
 	public int selectCount(BmMenuVO bmMenu) {
-		return bmMenuMapper.selectCount(mapper.map(bmMenu,BmMenu.class));
+		return bmMenuMapper.selectCount(BeanMapper.map(bmMenu,BmMenu.class));
 	}
 
 	@Override
-	public List<BmMenuVO> selectPage(BmMenuVO bmMenu, PaginationBean page) {
-		List<BmMenu> list =  bmMenuMapper.selectPage(mapper.map(bmMenu,BmMenu.class), page);
+	public List<BmMenuVO> selectPage(BmMenuVO bmMenu, PaginationBean<BmMenuVO> page) {
+		List<BmMenu> list =  bmMenuMapper.selectPage(BeanMapper.map(bmMenu,BmMenu.class), page);
 		List<BmMenuVO> result = new ArrayList<BmMenuVO>(); 
 		for(BmMenu bm: list){
-			result.add(mapper.map(bm, BmMenuVO.class));
+			result.add(BeanMapper.map(bm, BmMenuVO.class));
 		}
 		return result;
 	}
@@ -42,19 +42,19 @@ public class BmMenuServiceImpl implements BmMenuService {
 		List<BmMenu> list =  bmMenuMapper.selectByUid(uid);
 		List<BmMenuVO> result = new ArrayList<BmMenuVO>(); 
 		for(BmMenu bm: list){
-			result.add(mapper.map(bm, BmMenuVO.class));
+			result.add(BeanMapper.map(bm, BmMenuVO.class));
 		}
 		return result;
 	}
 
 	@Override
 	public Integer createSelective(BmMenuVO bmOrderVO) {
-		return bmMenuMapper.insertSelective(mapper.map(bmOrderVO,BmMenu.class));
+		return bmMenuMapper.insertSelective(BeanMapper.map(bmOrderVO,BmMenu.class));
 	}
 
 	@Override
 	public Integer updateMenu(BmMenuVO bmOrderVO) {
-		return bmMenuMapper.updateByPrimaryKeySelective(mapper.map(bmOrderVO,BmMenu.class));
+		return bmMenuMapper.updateByPrimaryKeySelective(BeanMapper.map(bmOrderVO,BmMenu.class));
 	}
 
 }

@@ -14,7 +14,7 @@ public interface BookShelfService {
 	
 	int deleteById(long id);
 	
-	int CreateBatch(List<BookShelfVO> bookShelfs);
+	int createBatch(List<BookShelfVO> bookShelfs);
 
 	int selectCount(String uid);
 }

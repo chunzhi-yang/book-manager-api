@@ -11,7 +11,7 @@ public interface BooksService {
 	
 	BooksVO selectById(long id);
 	
-	List<BooksVO> selectPage(BooksVO books,PaginationBean page);
+	List<BooksVO> selectPage(BooksVO books,PaginationBean<BooksVO> page);
 	
 	int selectCount(BooksVO books);
 

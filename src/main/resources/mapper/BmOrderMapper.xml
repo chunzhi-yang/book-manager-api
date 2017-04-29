@@ -54,6 +54,6 @@
    <select id="selectPage" resultType="java.lang.Integer">
   	select * from bm_order 
   	<include refid="queryParams"></include>
-  	limit #{(page.page-1)*page.pageSize},#{page.PageSize}
+  	limit ${page.pageSize*(page.page -1)},${page.pageSize}
   </select>
 </mapper>

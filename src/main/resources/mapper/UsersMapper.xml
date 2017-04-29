@@ -67,15 +67,15 @@
   			<include refid="usersQueryParams"></include>
   		</where>
   </select>
-  <select id="selectByUid">
+  <select id="selectByUid" resultMap="BaseResultMap">
   		select * from users where uid=#{uid,jdbcType=VARCHAR}
   </select>
-   <select id="findByAccountPassword">
+   <select id="findByAccountPassword" resultMap="BaseResultMap">
   		select * from users where
   		 user_name=#{userName,jdbcType=VARCHAR} 
   		 and user_password=#{userPassword,jdbcType=VARCHAR} 
   </select>
-   <select id="findByAccount">
+   <select id="findByAccount" resultMap="BaseResultMap">
   		select * from users  where user_name=#{userName,jdbcType=VARCHAR} 
   </select>
 </mapper>

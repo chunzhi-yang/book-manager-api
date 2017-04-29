@@ -31,8 +31,8 @@ public class BmUserAccount {
     /**
      * 更新时间
      */
-    @Column(name = "uodated_time")
-    private Date uodatedTime;
+    @Column(name = "updated_time")
+    private Date updatedTime;
 
     /**
      * 获取主键
@@ -109,18 +109,18 @@ public class BmUserAccount {
     /**
      * 获取更新时间
      *
-     * @return uodated_time - 更新时间
+     * @return updatedTime - 更新时间
      */
-    public Date getUodatedTime() {
-        return uodatedTime;
+    public Date getupdatedTime() {
+        return updatedTime;
     }
 
     /**
      * 设置更新时间
      *
-     * @param uodatedTime 更新时间
+     * @param updatedTime 更新时间
      */
-    public void setUodatedTime(Date uodatedTime) {
-        this.uodatedTime = uodatedTime;
+    public void setupdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 }

@@ -12,7 +12,7 @@ public class BmUserAccountVO implements java.io.Serializable{
     private String uid;
     private BigDecimal remain;
     private Date createdTime;
-    private Date uodatedTime;
+    private Date updatedTime;
 
     public Long getBmUserAccountId() {
         return bmUserAccountId;
@@ -84,18 +84,18 @@ public class BmUserAccountVO implements java.io.Serializable{
     /**
      * 获取更新时间
      *
-     * @return uodated_time - 更新时间
+     * @return updated_time - 更新时间
      */
-    public Date getUodatedTime() {
-        return uodatedTime;
+    public Date getUpdatedTime() {
+        return updatedTime;
     }
 
     /**
      * 设置更新时间
      *
-     * @param uodatedTime 更新时间
+     * @param updatedTime 更新时间
      */
-    public void setUodatedTime(Date uodatedTime) {
-        this.uodatedTime = uodatedTime;
+    public void setUpdatedTime(Date uodatedTime) {
+        this.updatedTime = uodatedTime;
     }
 }

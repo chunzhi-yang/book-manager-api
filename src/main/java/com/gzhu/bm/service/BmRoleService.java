@@ -10,5 +10,9 @@ public interface BmRoleService {
 	    
 	int selectCount(BmRoleVO record);
 	    
-	List<BmRoleVO> selectPage(BmRoleVO record,PaginationBean page);
+	List<BmRoleVO> selectPage(BmRoleVO record,PaginationBean<BmRoleVO> page);
+
+	Integer createSelective(BmRoleVO bmRoleVO);
+
+	Integer updateRole(BmRoleVO bmRoleVO);
 }

@@ -5,15 +5,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
-import com.gzhu.bm.entity.BmMenu;
 import com.gzhu.bm.entity.BmRole;
 import com.gzhu.bm.repo.BmRoleMapper;
 import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmRoleService;
-import com.gzhu.bm.vo.BmMenuVO;
+import com.gzhu.bm.util.BeanMapper;
 import com.gzhu.bm.vo.BmRoleVO;
 
 @Service
@@ -22,32 +20,37 @@ public class BmRoleServiceImpl implements BmRoleService {
 	@Resource
 	private BmRoleMapper bmRoleMapper;
 	
-	private DozerBeanMapper mapper = new DozerBeanMapper();
-	
+	 
 	@Override
 	public List<BmRoleVO> selectByUid(String uid) {
 		 
 		List<BmRole> list =  bmRoleMapper.selectByUid(uid);
 		List<BmRoleVO> result = new ArrayList<BmRoleVO>(); 
 		for(BmRole bm: list){
-			result.add(mapper.map(bm, BmRoleVO.class));
+			result.add(BeanMapper.map(bm, BmRoleVO.class));
 		}
 		return result;
 	}
 
 	@Override
 	public int selectCount(BmRoleVO record) {
-		return bmRoleMapper.selectCount(mapper.map(record,BmRole.class));
+		return bmRoleMapper.selectCount(BeanMapper.map(record,BmRole.class));
 	}
 
 	@Override
-	public List<BmRoleVO> selectPage(BmRoleVO record, PaginationBean page) {
-		List<BmRole> list = bmRoleMapper.selectPage(mapper.map(record,BmRole.class), page);
-		List<BmRoleVO> result = new ArrayList<BmRoleVO>();
-		for(BmRole bm:list){
-			result.add(mapper.map(bm, BmRoleVO.class));
-		}
-		return result;
+	public List<BmRoleVO> selectPage(BmRoleVO record, PaginationBean<BmRoleVO> page) {
+		List<BmRole> list = bmRoleMapper.selectPage(BeanMapper.map(record,BmRole.class), page);		 
+		return BeanMapper.mapList(list, BmRoleVO.class);
+	}
+
+	@Override
+	public Integer createSelective(BmRoleVO bmRoleVO) {
+		return bmRoleMapper.insertSelective(BeanMapper.map(bmRoleVO, BmRole.class));
+	}
+
+	@Override
+	public Integer updateRole(BmRoleVO bmRoleVO) {
+		return bmRoleMapper.updateByPrimaryKeySelective(BeanMapper.map(bmRoleVO, BmRole.class));
 	}
 
 }
