@@ -39,15 +39,14 @@ public class BooksTest {
 	public void testInsert(){
 		BooksVO booksVO = new BooksVO();
 		booksVO.setAuthor("chunzhi");
-		booksVO.setBookName("大话西游");
+		booksVO.setBookName("有神1111");
 		booksVO.setCategory(Byte.valueOf("2"));
-		booksVO.setContent("第一章 这是i什么");
-		booksVO.setCost(BigDecimal.valueOf(0.1d));
-		booksVO.setCreatedTime(new Date());
+		booksVO.setFilePath("111.txt");
+		booksVO.setCost(BigDecimal.valueOf(0.1d)); 
 		booksVO.setDescription("大话已有");
 		booksVO.setFreeChapters(1l);
 		booksVO.setHotScore(8l);
-		booksVO.setImgsId(2l);
+		booksVO.setImgPath("111.jpg");
 		booksVO.setOrderDiscount((short) 8);
 		Integer result = booksService.createSelective(booksVO );
 	}

@@ -29,12 +29,14 @@ public class BmMenuTest {
 	@Test
 	public void testSelect(){
 		BmMenuVO queryVO = new BmMenuVO(); 
+		queryVO.setRoleCode("R001");
 		int count = bmMenuService.selectCount(queryVO);
 		PaginationBean<BmMenuVO> paginationBean= new PaginationBean<BmMenuVO>(1,10,count);
 	 
 		List<BmMenuVO>  list = new ArrayList<BmMenuVO>();
 		if(count > 0){		
-			list = bmMenuService.selectPage(queryVO, paginationBean);
+//			list = bmMenuService.selectPage(queryVO, paginationBean);
+			list = bmMenuService.selectByRoleCode("R001");
 		}
 		paginationBean.setData(list);
 		 

@@ -13,6 +13,7 @@
     <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
     <result column="is_under_control" property="isUnderControl" jdbcType="TINYINT" />
     <result column="menu_type" property="menuType" jdbcType="TINYINT" />
+    <result column="role_code" property="roleCode" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Columns">
   	`bm_menu_id`,
@@ -22,7 +23,8 @@
   	`status`,
   	`menu_name`,
   	`is_under_control`,
-  	`menu_type`
+  	`menu_type`,
+  	`role_code`
   </sql>
   <sql id="queryParams">
   	<where>
@@ -51,6 +53,9 @@
   	  <if test="record.menuType != null">
   	  	and menu_type = #{record.menuType,jdbcType=TINYINT}
   	  </if>
+  	  <if test="record.roleCode != null">
+  	  	and role_code = #{record.roleCode,jdbcType=VARCHAR}
+  	  </if>
   	</where>
   </sql>
   <select id="selectCount" resultType="java.lang.Integer">
@@ -62,9 +67,8 @@
   	<include refid="queryParams"></include>
   	limit ${page.pageSize*(page.page -1)},${page.pageSize}
   </select>
-   <select id="selectByUid" resultMap="BaseResultMap" >
+   <select id="selectByRoleCode" resultMap="BaseResultMap" >
   	select <include refid="Base_Columns"></include> from bm_menu
-  	<include refid="queryParams"></include>
-  	limit ${page.pageSize*(page.page -1)},${page.pageSize}
+  	where role_code=#{roleCode}
   </select>
 </mapper>

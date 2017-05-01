@@ -50,10 +50,23 @@ public class ShiroDbRealm extends AuthorizingRealm  {
 					return null;
 				}
 				SimpleAuthorizationInfo sazi = new SimpleAuthorizationInfo();
-				
-				try {			
-//					sazi.addRoles(null);		
-//					sazi.addStringPermissions(null);
+				 
+				try {	
+					UsersVO user = (UsersVO) SecurityUtils.getSubject().getPrincipals();
+					List<String> menus = new ArrayList<String>();
+					List<String> roles = new ArrayList<String>();
+					List<BmMenuVO> userMenus= new ArrayList<>();
+					List<BmRoleVO> userRoles = bmRoleService.selectByUid(user.getUid());
+					 
+					for(BmRoleVO r:userRoles){
+						roles.add(r.getRoleName());
+						userMenus.addAll(bmMenuService.selectByRoleCode(r.getRoleCode()));
+					}
+					for(BmMenuVO bm:userMenus){
+						menus.add(bm.getUrl());
+					} 
+					sazi.addRoles(roles);		
+					sazi.addStringPermissions(menus);
 				} catch (Exception e) {
 					logger.error(e.getMessage(),e);
 				}
@@ -81,14 +94,18 @@ public class ShiroDbRealm extends AuthorizingRealm  {
 			} 
 			List<String> menus = new ArrayList<String>();
 			List<String> roles = new ArrayList<String>();
-			List<BmMenuVO> userMenus= bmMenuService.selectByUid(user.getUid());
+			List<BmMenuVO> userMenus= new ArrayList<>();
 			List<BmRoleVO> userRoles = bmRoleService.selectByUid(user.getUid());
-			for(BmMenuVO m:userMenus){
-				menus.add(m.getUrl());
-			}
+			 
 			for(BmRoleVO r:userRoles){
 				roles.add(r.getRoleName());
+				userMenus.addAll(bmMenuService.selectByRoleCode(r.getRoleCode()));
 			}
+			for(BmMenuVO bm:userMenus){
+				menus.add(bm.getUrl());
+			}
+			user.setMenus(menus);
+			user.setRoles(roles);
 		}catch (Exception e) {
 			logger.error(e.getMessage(),e);
 			throw  new AuthenticationException(e.getMessage());

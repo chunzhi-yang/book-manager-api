@@ -33,7 +33,7 @@
         <javaClientGenerator targetPackage="${mapperPackage}" targetProject="${src_main_java}" type="XMLMAPPER"> 
 		</javaClientGenerator>	
 
-        <table tableName="%">
+        <table tableName="bm_files">
         </table>
 
     </context>

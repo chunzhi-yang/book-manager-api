@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.interfaces.RSAPrivateKey;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -24,20 +27,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gzhu.bm.security.util.MD5Helper;
 import com.gzhu.bm.security.util.RSAUtil;
 import com.gzhu.bm.service.UsersService;
 import com.gzhu.bm.vo.RSAPublicKeyVo;
 import com.gzhu.bm.vo.UsersVO;
 
 @RestController
-@RequestMapping("login")
-@CrossOrigin
+@RequestMapping("login") 
 public class LoginController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -49,8 +50,8 @@ public class LoginController {
 	UsersService usersService;
 	
 	@RequestMapping(value="signin",method=RequestMethod.POST)
-	public ResponseEntity<String> login(HttpServletResponse resp,HttpServletRequest request,@RequestParam("username")String userName,@RequestParam("password")String password) throws Exception{
-		ResponseEntity<String> result = new ResponseEntity<String>("登录成功", HttpStatus.OK);		 
+	public ResponseEntity<Integer> login(HttpServletRequest request,String userName,String password,Boolean rememberMe) throws Exception{
+		ResponseEntity<Integer> result = new ResponseEntity<Integer>(1, HttpStatus.OK);		 
 		
 		Subject user = SecurityUtils.getSubject();		
 		ServletContext sct = request.getSession().getServletContext();   
@@ -61,8 +62,7 @@ public class LoginController {
 		}
 		String dencrypedPwd = RSAUtil.decryptByPrivateKey(password, privateKey); //解密后密码
 		
-		AuthenticationToken token = new UsernamePasswordToken(userName, dencrypedPwd);
-		
+		AuthenticationToken token = new UsernamePasswordToken(userName, dencrypedPwd,rememberMe); 		 
 		try {
 			//会调用 shiroDbRealm 的认证方法 ShiroDbRealm.doGetAuthenticationInfo(AuthenticationToken)
 			user.login(token);
@@ -81,7 +81,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="signup",method=RequestMethod.POST)  
-	public ResponseEntity<String> signup(HttpServletRequest request,@RequestParam("userName")String userName,@RequestParam("userPassword")String password)throws Exception{
+	public ResponseEntity<Integer> signup(String userName,String password,HttpServletRequest request)throws Exception{
 		try{ 
 			ServletContext sct = request.getSession().getServletContext();   
 		    // 从上下文环境中通过属性名获取属私钥 
@@ -92,13 +92,20 @@ public class LoginController {
 			String userPassword =RSAUtil.decryptByPrivateKey(password, privateKey);
 			UsersVO usersVo = new UsersVO();
 			usersVo.setUserName(userName);
-			usersVo .setUserPassword(userPassword);
+			usersVo .setUserPassword(MD5Helper.MD5(userPassword));
+			SimpleDateFormat dateFmt = new SimpleDateFormat("YYYYMMddHHmmss"); 
+			StringBuffer sb = new StringBuffer();
+			sb.append(dateFmt.format(Calendar.getInstance().getTime()))
+			.append("00")
+			.append((int)Math.random()*100); 
+			usersVo.setBirth(new Date(70,01,01));
+			usersVo.setUid(sb.toString());
 			usersService.createSelective(usersVo); 
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			throw e;
 		}
-		return new ResponseEntity<>("注册成功",HttpStatus.OK);
+		return new ResponseEntity<>(1,HttpStatus.OK);
 	}
 	 
 	@RequestMapping(value = "/getRSAPublicKey", method = RequestMethod.GET) 

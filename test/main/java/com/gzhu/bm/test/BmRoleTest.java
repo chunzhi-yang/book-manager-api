@@ -24,12 +24,14 @@ public class BmRoleTest {
 	@Test
 	public void testSelect(){
 		BmRoleVO bmRoleVO = new BmRoleVO(); 
+		bmRoleVO.setUid("20170425230453000");
 		int count = bmRoleService.selectCount(bmRoleVO);
 		PaginationBean<BmRoleVO> paginationBean= new PaginationBean<BmRoleVO>(2,1,count);
 	 
 		List<BmRoleVO>  list = new ArrayList<BmRoleVO>();
 		if(count > 0){		
-			list = bmRoleService.selectPage(bmRoleVO, paginationBean);
+//			list = bmRoleService.selectPage(bmRoleVO, paginationBean);
+			list = bmRoleService.selectByUid("20170425230453000");
 		}
 		paginationBean.setData(list);
 		 
@@ -37,9 +39,8 @@ public class BmRoleTest {
 	
 	@Test
 	public void testInsert(){
-		BmRoleVO bmRoleVO = new BmRoleVO(); 
-		bmRoleVO.setCreatedTime(new Date());
-		bmRoleVO.setRoleCode("R001");
+		BmRoleVO bmRoleVO = new BmRoleVO();
+		bmRoleVO.setRoleCode("R002");
 		bmRoleVO.setRoleName("test"); 
 		Integer result = bmRoleService.createSelective(bmRoleVO);
 	}

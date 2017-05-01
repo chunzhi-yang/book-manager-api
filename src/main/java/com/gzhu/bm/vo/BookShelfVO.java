@@ -10,7 +10,7 @@ public class BookShelfVO implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
     private Long bookShelfId;
     private Long booksId;
-    private Long usersId;
+    private String uid;
     private BigDecimal readProcess;
     private Date createdTime;
     private Date updatedTime;
@@ -46,25 +46,16 @@ public class BookShelfVO implements java.io.Serializable {
         this.booksId = booksId;
     }
 
-    /**
-     * 获取用户ID
-     *
-     * @return users_id - 用户ID
-     */
-    public Long getUsersId() {
-        return usersId;
-    }
+ 
+    public String getUid() {
+		return uid;
+	}
 
-    /**
-     * 设置用户ID
-     *
-     * @param usersId 用户ID
-     */
-    public void setUsersId(Long usersId) {
-        this.usersId = usersId;
-    }
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
-    /**
+	/**
      * 获取阅读进度
      *
      * @return read_process - 阅读进度

@@ -14,7 +14,7 @@ public class BmMenuVO implements java.io.Serializable{
     private String menuName;
     private Byte isUnderControl;
     private Byte menuType;
-    
+    private String roleCode;
     public Long getBmMenuId() {
         return bmMenuId;
     }
@@ -153,4 +153,12 @@ public class BmMenuVO implements java.io.Serializable{
     public void setMenuType(Byte menuType) {
         this.menuType = menuType;
     }
+
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
 }

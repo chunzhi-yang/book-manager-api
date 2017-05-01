@@ -9,9 +9,17 @@ public class BookImgsVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
     private Long imgsId;
     private Date createdTime;
-    private String content;
+    private String filePath;
     
-    public Long getImgsId() {
+    public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public Long getImgsId() {
         return imgsId;
     }
 
@@ -42,21 +50,4 @@ public class BookImgsVO implements java.io.Serializable{
         this.createdTime = createdTime;
     }
 
-    /**
-     * 获取图片内容
-     *
-     * @return content - 图片内容
-     */
-    public String getContent() {
-        return content;
-    }
-
-    /**
-     * 设置图片内容
-     *
-     * @param content 图片内容
-     */
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

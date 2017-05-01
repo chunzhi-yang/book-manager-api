@@ -11,7 +11,11 @@ public class BmRole {
     @Id
     @Column(name = "bm_role_id")
     private Long bmRoleId;
-
+    /**
+     *uid 
+     */
+    @Column(name = "uid")
+    private String uid;
     /**
      * 角色编码
      */
@@ -124,4 +128,12 @@ public class BmRole {
     public void setStatus(Byte status) {
         this.status = status;
     }
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 }

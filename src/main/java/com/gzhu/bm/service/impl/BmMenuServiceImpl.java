@@ -37,16 +37,7 @@ public class BmMenuServiceImpl implements BmMenuService {
 		return result;
 	}
 
-	@Override
-	public List<BmMenuVO> selectByUid(String uid) {
-		List<BmMenu> list =  bmMenuMapper.selectByUid(uid);
-		List<BmMenuVO> result = new ArrayList<BmMenuVO>(); 
-		for(BmMenu bm: list){
-			result.add(BeanMapper.map(bm, BmMenuVO.class));
-		}
-		return result;
-	}
-
+ 
 	@Override
 	public Integer createSelective(BmMenuVO bmOrderVO) {
 		return bmMenuMapper.insertSelective(BeanMapper.map(bmOrderVO,BmMenu.class));
@@ -55,6 +46,11 @@ public class BmMenuServiceImpl implements BmMenuService {
 	@Override
 	public Integer updateMenu(BmMenuVO bmOrderVO) {
 		return bmMenuMapper.updateByPrimaryKeySelective(BeanMapper.map(bmOrderVO,BmMenu.class));
+	}
+
+	@Override
+	public List<BmMenuVO> selectByRoleCode(String roleCode) {
+		return BeanMapper.mapList(bmMenuMapper.selectByRoleCode(roleCode), BmMenuVO.class);
 	}
 
 }

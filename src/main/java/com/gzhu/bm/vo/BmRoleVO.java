@@ -12,7 +12,7 @@ public class BmRoleVO implements java.io.Serializable{
     private String roleName;
     private Date createdTime;
     private Byte status;
-    
+    private String uid;
     public Long getBmRoleId() {
         return bmRoleId;
     }
@@ -97,4 +97,13 @@ public class BmRoleVO implements java.io.Serializable{
     public void setStatus(Byte status) {
         this.status = status;
     }
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+    
 }

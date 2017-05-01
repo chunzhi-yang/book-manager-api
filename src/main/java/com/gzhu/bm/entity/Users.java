@@ -56,10 +56,10 @@ public class Users {
     private Date createdTime;
 
     /**
-     * 头像img_id
+     * 头像路径
      */
-    @Column(name = "imgs_id")
-    private Long imgsId;
+    @Column(name = "img_path")
+    private String imgPath;
 
     /**
      * 获取主键
@@ -223,21 +223,13 @@ public class Users {
         this.createdTime = createdTime;
     }
 
-    /**
-     * 获取头像img_id
-     *
-     * @return imgs_id - 头像img_id
-     */
-    public Long getImgsId() {
-        return imgsId;
+   
+    public String getImgPath() {
+        return imgPath;
     }
 
-    /**
-     * 设置头像img_id
-     *
-     * @param imgsId 头像img_id
-     */
-    public void setImgsId(Long imgsId) {
-        this.imgsId = imgsId;
+     
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

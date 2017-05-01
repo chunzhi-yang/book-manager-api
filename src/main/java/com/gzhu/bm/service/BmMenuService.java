@@ -9,10 +9,10 @@ public interface BmMenuService {
 	int selectCount(BmMenuVO bmMenu);
 
 	List<BmMenuVO> selectPage(BmMenuVO bmMenu,PaginationBean<BmMenuVO> page);
-
-	List<BmMenuVO> selectByUid(String uid);
-
+	 
 	Integer createSelective(BmMenuVO bmOrderVO);
 
-	Integer updateMenu(BmMenuVO bmOrderVO); 
+	Integer updateMenu(BmMenuVO bmOrderVO);
+
+	List<BmMenuVO> selectByRoleCode(String roleCode); 
 }

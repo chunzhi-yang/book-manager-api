@@ -40,10 +40,10 @@ public class Books {
     private BigDecimal cost;
 
     /**
-     * 缩略图id
+     * 缩略图路径
      */
-    @Column(name = "imgs_id")
-    private Long imgsId;
+    @Column(name = "img_path")
+    private String imgPath;
 
     /**
      * 创建时间
@@ -82,9 +82,10 @@ public class Books {
     private Short orderDiscount;
 
     /**
-     * 图书内容
+     * 文件路径
      */
-    private String content;
+    @Column(name = "file_path")
+    private String filePath;
 
     /**
      * 获取主键ID
@@ -194,23 +195,7 @@ public class Books {
         this.cost = cost;
     }
 
-    /**
-     * 获取缩略图id
-     *
-     * @return imgs_id - 缩略图id
-     */
-    public Long getImgsId() {
-        return imgsId;
-    }
-
-    /**
-     * 设置缩略图id
-     *
-     * @param imgsId 缩略图id
-     */
-    public void setImgsId(Long imgsId) {
-        this.imgsId = imgsId;
-    }
+    
 
     /**
      * 获取创建时间
@@ -320,21 +305,21 @@ public class Books {
         this.orderDiscount = orderDiscount;
     }
 
-    /**
-     * 获取图书内容
-     *
-     * @return content - 图书内容
-     */
-    public String getContent() {
-        return content;
-    }
+	public String getImgPath() {
+		return imgPath;
+	}
 
-    /**
-     * 设置图书内容
-     *
-     * @param content 图书内容
-     */
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+    
 }

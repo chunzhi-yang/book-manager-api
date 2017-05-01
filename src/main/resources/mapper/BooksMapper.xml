@@ -11,14 +11,14 @@
     <result column="category" property="category" jdbcType="TINYINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="cost" property="cost" jdbcType="DECIMAL" />
-    <result column="imgs_id" property="imgsId" jdbcType="BIGINT" />
+    <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
     <result column="hot_score" property="hotScore" jdbcType="BIGINT" />
     <result column="free_chapters" property="freeChapters" jdbcType="BIGINT" />
     <result column="order_discount" property="orderDiscount" jdbcType="DECIMAL" />
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="queryParams">
   	<where>
@@ -41,8 +41,11 @@
   		<if test="record.cost != null">
   			and cost=#{record.cost,jdbcType=DECIMAL}
   		</if>
-  		<if test="record.imgsId != null">
-  			and imgs_id=#{record.imgsId,jdbcType=BIGINT}
+  		<if test="record.imgPath != null">
+  			and img_path=#{record.imgPath,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.filePath != null">
+  			and file_path=#{record.filePath,jdbcType=VARCHAR}
   		</if>
   		<if test="record.createdTime != null">
   			and created_time=#{record.createdTime,jdbcType=TIMESTAMP}

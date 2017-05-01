@@ -14,7 +14,7 @@
     <result column="location" property="location" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
-    <result column="imgs_id" property="imgsId" jdbcType="BIGINT" />
+    <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="BaseColumns">
   	`users_id`,
@@ -26,39 +26,39 @@
   	`location`,
   	`description`,
   	`created_time`,
-  	`imgs_id`
+  	`img_path`
   </sql>
  
   <sql id="usersQueryParams">
   		<if test="record.usersId != null">
-  			users_id = #{record.usersId,jdbcType=BIGINT},
+  			and users_id = #{record.usersId,jdbcType=BIGINT}
   		</if>
   		<if test="record.uid != null">
-  			uid= #{record.uid,jdbcType=VARCHAR},
+  			and uid= #{record.uid,jdbcType=VARCHAR}
   		</if>
   		<if test="record.userName != null">
-  			user_name = #{record.userName,jdbcType=VARCHAR},
+  			and user_name = #{record.userName,jdbcType=VARCHAR}
   		</if>
   		<if test="record.userPassword != null">
-  			user_password =#{record.userPassword,jdbcType=VARCHAR},
+  			and user_password =#{record.userPassword,jdbcType=VARCHAR}
   		</if>
   		<if test="record.sex != null">
-  			sex = #{record.sex,jdbcType=TINYINT},
+  			and sex = #{record.sex,jdbcType=TINYINT}
   		</if>
   		<if test="record.birth != null">
-  			birth = #{record.birth,jdbcType=TIMESTAMP},
+  			and birth = #{record.birth,jdbcType=TIMESTAMP}
   		</if>
   		<if test="record.location != null">
-  			location = #{record.location,jdbcType=VARCHAR},
+  			and location = #{record.location,jdbcType=VARCHAR}
   		</if>
   		<if test="record.description != null">
-  			description = #{record.description,jdbcType=VARCHAR},
+  			and description = #{record.description,jdbcType=VARCHAR}
   		</if>
   		<if test="record.created_time != null">
-  			created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+  			and created_time = #{record.createdTime,jdbcType=TIMESTAMP}
   		</if>
-  		<if test="record.imgs_id != null">
-  			imgs_id = #{record.imgsId,jdbcType=BIGINT},
+  		<if test="record.imgPath != null">
+  			and img_path = #{record.imgPath,jdbcType=VARCHAR}
   		</if>
   </sql>
   <select id="selectCount">

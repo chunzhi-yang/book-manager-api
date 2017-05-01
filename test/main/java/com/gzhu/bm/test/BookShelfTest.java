@@ -42,7 +42,7 @@ public class BookShelfTest {
 		bookShelfVO.setCreatedTime(new Date());
 		bookShelfVO.setReadProcess(BigDecimal.valueOf(0.12d));
 		bookShelfVO.setUpdatedTime(new Date());
-		bookShelfVO.setUsersId(2l);
+		bookShelfVO.setUid("20170425230453000");
 		Integer result = bookShelfService.createSelective(bookShelfVO );
 	}
 	@Test
@@ -52,7 +52,7 @@ public class BookShelfTest {
 		bookShelfVO.setCreatedTime(new Date());
 		bookShelfVO.setReadProcess(BigDecimal.valueOf(0.12d));
 		bookShelfVO.setUpdatedTime(new Date());
-		bookShelfVO.setUsersId(3l);
+		bookShelfVO.setUid("20170425230453000");
 		List<BookShelfVO> bookShelfVOList = new ArrayList<>();
 		
 		bookShelfVOList.add(bookShelfVO);
@@ -61,7 +61,7 @@ public class BookShelfTest {
 		bookShelfVO.setCreatedTime(new Date());
 		bookShelfVO.setReadProcess(BigDecimal.valueOf(0.12d));
 		bookShelfVO.setUpdatedTime(new Date());
-		bookShelfVO.setUsersId(3l);
+		bookShelfVO.setUid("20170425230453000");
 		bookShelfVOList.add(bookShelfVO);
 		Integer result = bookShelfService.createBatch(bookShelfVOList );
 	}

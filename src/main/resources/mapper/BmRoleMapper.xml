@@ -10,6 +10,7 @@
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="queryParams">
   	<where>
@@ -29,7 +30,9 @@
   		<if test="record.roleName != null">
   			and role_name = #{record.roleName,jdbcType=VARCHAR}
   		</if>
-  		 
+  		 <if test="record.uid != null">
+  			and uid = #{record.uid,jdbcType=VARCHAR}
+  		</if>
   	  </where>
   	</sql>
   	<select id="selectCount" resultType="java.lang.Integer">

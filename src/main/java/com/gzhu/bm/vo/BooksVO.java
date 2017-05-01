@@ -15,14 +15,14 @@ public class BooksVO implements java.io.Serializable{
     private Byte category;
     private String description;
     private BigDecimal cost;
-    private Long imgsId;
+    private String imgPath;
     private Date createdTime;
     private Date updatedTime;
     private Byte isDelete;
     private Long hotScore;
     private Long freeChapters;
     private Short orderDiscount;
-    private String content;
+    private String filePath;
     
     public Long getBooksId() {
         return booksId;
@@ -127,24 +127,7 @@ public class BooksVO implements java.io.Serializable{
         this.cost = cost;
     }
 
-    /**
-     * 获取缩略图id
-     *
-     * @return imgs_id - 缩略图id
-     */
-    public Long getImgsId() {
-        return imgsId;
-    }
-
-    /**
-     * 设置缩略图id
-     *
-     * @param imgsId 缩略图id
-     */
-    public void setImgsId(Long imgsId) {
-        this.imgsId = imgsId;
-    }
-
+ 
     /**
      * 获取创建时间
      *
@@ -253,21 +236,21 @@ public class BooksVO implements java.io.Serializable{
         this.orderDiscount = orderDiscount;
     }
 
-    /**
-     * 获取图书内容
-     *
-     * @return content - 图书内容
-     */
-    public String getContent() {
-        return content;
-    }
+	public String getImgPath() {
+		return imgPath;
+	}
 
-    /**
-     * 设置图书内容
-     *
-     * @param content 图书内容
-     */
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+    
 }

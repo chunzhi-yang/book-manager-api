@@ -50,7 +50,11 @@ public class BmMenu {
      */
     @Column(name = "menu_type")
     private Byte menuType;
-
+    /**
+     * role_code
+     */
+    @Column(name = "role_code")
+    private String roleCode;
     /**
      * 获取主键
      *
@@ -60,7 +64,15 @@ public class BmMenu {
         return bmMenuId;
     }
 
-    /**
+    public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
+	/**
      * 设置主键
      *
      * @param bmMenuId 主键

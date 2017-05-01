@@ -22,12 +22,15 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response,Object mappedValue) throws Exception {
-		 HttpSession session = ((HttpServletRequest)request).getSession();
+		 
+		HttpSession session = ((HttpServletRequest)request).getSession();
 
          //页面输入的验证码
 
          String randomcode = request.getParameter("randomcode");
-
+         if(randomcode == null){
+        	 return true;
+         }
          //从session中取出验证码
 
          String validateCode = (String) session.getAttribute("validateCode");

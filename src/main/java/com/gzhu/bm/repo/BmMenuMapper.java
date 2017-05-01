@@ -17,5 +17,7 @@ public interface BmMenuMapper extends Mapper<BmMenu> {
 
     List<BmMenu> selectPage(@Param("record")BmMenu bmMenu,@Param("page")PaginationBean<BmMenuVO> page);
     
-    List<BmMenu> selectByUid(@Param("uid")String uid); 
+   
+
+	List<BmMenu> selectByRoleCode(@Param("roleCode")String roleCode); 
 }

@@ -13,7 +13,7 @@ import com.gzhu.bm.service.BmUserAccountService;
 import com.gzhu.bm.vo.BmUserAccountVO;
 
 @RestController
-@RequestMapping("role")
+@RequestMapping("userAccount")
 public class BmUserAccountController {
 
 	@Autowired

@@ -17,18 +17,12 @@ public class UsersVO implements java.io.Serializable{
     private String location;
     private String description;
     private Date createdTime;
-    private Long imgsId;
+    private String imgPath;
     
     private List<String> menus;
     private List<String> roles;
     
-    @Override
-	public String toString() {
-		return "UsersVO [usersId=" + usersId + ", uid=" + uid + ", userName=" + userName + ", userPassword="
-				+ userPassword + ", sex=" + sex + ", birth=" + birth + ", location=" + location + ", description="
-				+ description + ", createdTime=" + createdTime + ", imgsId=" + imgsId + "]";
-	}
-
+ 
 	public List<String> getMenus() {
 		return menus;
 	}
@@ -202,21 +196,13 @@ public class UsersVO implements java.io.Serializable{
         this.createdTime = createdTime;
     }
 
-    /**
-     * 获取头像img_id
-     *
-     * @return imgs_id - 头像img_id
-     */
-    public Long getImgsId() {
-        return imgsId;
-    }
+	public String getImgPath() {
+		return imgPath;
+	}
 
-    /**
-     * 设置头像img_id
-     *
-     * @param imgsId 头像img_id
-     */
-    public void setImgsId(Long imgsId) {
-        this.imgsId = imgsId;
-    }
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 }
+     
+     

@@ -19,7 +19,7 @@ import com.gzhu.bm.vo.BookShelfVO;
 import com.gzhu.bm.vo.BooksVO;
 
 @RestController
-@RequestMapping("booksShelf")
+@RequestMapping("bookShelf")
 public class BookShelfController {
 
 	@Autowired

@@ -22,8 +22,8 @@ public class BookShelf {
     /**
      * 用户ID
      */
-    @Column(name = "users_id")
-    private Long usersId;
+    @Column(name = "uid")
+    private String uid;
 
     /**
      * 阅读进度
@@ -79,25 +79,17 @@ public class BookShelf {
         this.booksId = booksId;
     }
 
-    /**
-     * 获取用户ID
-     *
-     * @return users_id - 用户ID
-     */
-    public Long getUsersId() {
-        return usersId;
-    }
+    
 
-    /**
-     * 设置用户ID
-     *
-     * @param usersId 用户ID
-     */
-    public void setUsersId(Long usersId) {
-        this.usersId = usersId;
-    }
+    public String getUid() {
+		return uid;
+	}
 
-    /**
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	/**
      * 获取阅读进度
      *
      * @return read_process - 阅读进度

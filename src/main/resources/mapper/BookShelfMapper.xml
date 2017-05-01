@@ -7,7 +7,7 @@
     -->
     <id column="book_shelf_id" property="bookShelfId" jdbcType="BIGINT" />
     <result column="books_id" property="booksId" jdbcType="BIGINT" />
-    <result column="users_id" property="usersId" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="read_process" property="readProcess" jdbcType="DECIMAL" />
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
@@ -22,7 +22,7 @@
   <insert id="createBatch" parameterType="java.util.List">
   		insert into book_shelf(
   			books_id,
-  			users_id,
+  			uid,
   			read_process,
   			created_time,
   			updated_time
@@ -36,10 +36,10 @@
 	  				0,
 	  			</if>
 	  			
-	  			<if test="record.usersId != null">
-	  				#{record.usersId,jdbcType=BIGINT},
+	  			<if test="record.uid != null">
+	  				#{record.uid,jdbcType=VARCHAR},
 	  			</if>
-	  			<if test="record.usersId == null">
+	  			<if test="record.uid == null">
 	  				0,
 	  			</if>
 	  			
