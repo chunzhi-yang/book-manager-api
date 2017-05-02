@@ -30,14 +30,8 @@
         <property name="securityManager" ref="securityManager" />   
         <property name="filterChainDefinitions">  
             <value>  
-                /login/* = anon  
-                /books/* = anon
-                /bookShelf/* = anon
- 				/bookImg/* = anon 
-                /app/* = anon
-                /user/* = anon
-                /login/logout = authc
-                /** = authc  
+                
+                /** = anon  
             </value>  
         </property>   
     </bean>

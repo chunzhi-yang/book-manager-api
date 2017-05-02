@@ -37,6 +37,7 @@ public class BmAccountLogController {
 		Integer result = bmAccountLogService.createSelective(bmAccountLogVO);
 		return new ResponseEntity<>(result,result.intValue()>0?HttpStatus.OK:HttpStatus.SERVICE_UNAVAILABLE);
 	}
+	 
 	
 	
 }
