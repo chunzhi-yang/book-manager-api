@@ -6,34 +6,25 @@
     default-lazy-init="true">
 
     <description>Shiro Configuration</description> 
-    <bean id="formAuthenticationFilter"
-
-              class="com.gzhu.bm.shiro.FormAuthenticationFilter">
-
-              <!-- 表单中账号的input名称 -->
-
-              <property name="usernameParam" value="userName" />
-
-              <!-- 表单中密码的input名称 -->
-
-              <property name="passwordParam" value="userPassword" />
-
-              <property name="rememberMeParam" value="rememberMe"/>
-
-              <!-- loginurl：用户登陆地址，此地址是可以http访问的url地址 -->
-
-              <property name="loginUrl" value="/login/signin" />
-
-       </bean>
+    
     <!-- 安全认证过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager" />   
+        <property name="securityManager" ref="securityManager" /> 
+        <property name=""/>  
         <property name="filterChainDefinitions">  
             <value>  
-                
-                /** = anon  
+            	/app/* = anon
+            	/login/* = anon
+            	/bookshelf/* = anon
+                /** = logined 
             </value>  
-        </property>   
+        </property> 
+        <property name="filters">
+			<map>			  
+				<!--权限校验的过滤器 -->
+                <entry key="logined" value-ref="logined"></entry>	   
+			</map>
+		</property>  
     </bean>
     
 	
