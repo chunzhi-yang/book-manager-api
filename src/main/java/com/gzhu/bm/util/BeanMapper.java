@@ -17,6 +17,9 @@ public class BeanMapper {
 		return result;
 	}
 	public static <T, V> T  map(V obj,Class<T> clazz){
+		if(obj == null){
+			return null;
+		}
 		return mapper.map(obj, clazz);
 	}
 }

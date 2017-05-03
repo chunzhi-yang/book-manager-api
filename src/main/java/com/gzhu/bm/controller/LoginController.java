@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,8 +39,7 @@ import com.gzhu.bm.vo.RSAPublicKeyVo;
 import com.gzhu.bm.vo.UsersVO;
 
 @RestController
-@RequestMapping("login") 
-@CrossOrigin("*")
+@RequestMapping("login")  
 public class LoginController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -73,8 +71,7 @@ public class LoginController {
 		} catch (Exception e) { 
 			logger.error(e.getMessage(),e);
 			result.setSuccess(false);
-			result.setMessage(e.getMessage());
-			throw e;
+			result.setMessage(e.getMessage());		 
 		} 
 		return new ResponseEntity<>(result,HttpStatus.OK);	
 	
@@ -117,8 +114,7 @@ public class LoginController {
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result.setSuccess(false);
-			result.setMessage(e.getMessage());
-			throw e;
+			result.setMessage(e.getMessage());			
 		}
 		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
