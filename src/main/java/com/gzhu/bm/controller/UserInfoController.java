@@ -49,10 +49,11 @@ public class UserInfoController {
 	}
 	
 	
-	@RequestMapping(value="update",method=RequestMethod.PUT)
-	public ResponseEntity<Integer> update(@RequestBody UsersVO usersVO) {
+	@RequestMapping(value="update",method=RequestMethod.POST)
+	public ResponseEntity<JSONWrappedObject> update(@RequestBody UsersVO usersVO) {
 		Integer res = usersService.updateByPrimaryKeySelective(usersVO);  
-		return new ResponseEntity<>(res,HttpStatus.OK);
+		JSONWrappedObject obj = new JSONWrappedObject("", "", res);
+		return new ResponseEntity<>(obj,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="upload",method=RequestMethod.POST)

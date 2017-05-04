@@ -59,7 +59,7 @@
   	</where>
   </sql>
   <select id="selectCount" resultType="java.lang.Integer">
-  	select count(*) from bm_menu
+  	select count(1) from bm_menu
   	<include refid="queryParams"></include>
   </select>
   <select id="selectPage" resultMap="BaseResultMap">

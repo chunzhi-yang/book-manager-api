@@ -30,12 +30,16 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 		out.println(m);
 		out.flush();
 		out.close();
+		log.info("请求被拦截",request.toString());
 		return false;
 	}
 
 	@Override
 	public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
 		Subject subject = getSubject(request, response);
+		if(subject.getPrincipal() == null){
+			log.error("请登录!!!!!!!!!!!!!!");
+		}
 		return subject.getPrincipal() != null;
 	}
 

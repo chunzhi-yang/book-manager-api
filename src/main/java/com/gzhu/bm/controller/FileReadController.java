@@ -23,8 +23,8 @@ public class FileReadController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@RequestMapping(value="downloadAvatar/{url}", method=RequestMethod.GET)
-	public void downloadAvatar(@PathVariable("url")String url,HttpServletResponse response){
+	@RequestMapping(value="downloadAvatar", method=RequestMethod.GET)
+	public void downloadAvatar(String url,HttpServletResponse response){
 		response.setCharacterEncoding("utf-8");
         response.setContentType("image/jpeg");
         response.setHeader("Content-Disposition", "attachment;fileName="+ url);
@@ -51,8 +51,8 @@ public class FileReadController {
         }               
 	}
 	
-	@RequestMapping(value="downloadFile/{url}", method=RequestMethod.GET)
-	public void downloadBook(@PathVariable("url")String url,HttpServletResponse response){
+	@RequestMapping(value="downloadFile", method=RequestMethod.GET)
+	public void downloadBook(String url,HttpServletResponse response){
 		response.setCharacterEncoding("utf-8");
         response.setContentType("text/plain");
         response.setHeader("Content-Disposition", "attachment;fileName="+ url);

@@ -15,7 +15,7 @@
             	/app/** = anon
             	/login/** = anon
             	/bookshelf/** = anon
-                /** = logined 
+                /** = anon 
             </value>  
         </property> 
         <property name="filters">
