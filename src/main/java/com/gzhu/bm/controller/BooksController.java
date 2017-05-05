@@ -23,6 +23,8 @@ import com.gzhu.bm.service.BooksService;
 import com.gzhu.bm.util.FileUtil;
 import com.gzhu.bm.vo.BooksVO;
 
+import net.sf.json.JSONObject;
+
 @RestController
 @RequestMapping("books")
 public class BooksController {
@@ -72,11 +74,13 @@ public class BooksController {
  
 
 	@RequestMapping(value="update",method=RequestMethod.PUT)
-	public ResponseEntity<Integer> update(@RequestParam("book") CommonsMultipartFile book, BooksVO booksVO) throws Exception{
+	public ResponseEntity<JSONObject> update(@RequestParam("book") CommonsMultipartFile book, BooksVO booksVO)
+			throws Exception {
 		String fileName = saveFile(book,Constants.FILE_PATH); 
-		booksVO.setFilePath("app/downloadFile/"+fileName);
+		booksVO.setFilePath("app/downloadFile/" + fileName);
 		Integer result = booksService.update(booksVO);
-		return new ResponseEntity<>(result,result.intValue()>0?HttpStatus.OK:HttpStatus.SERVICE_UNAVAILABLE);
+		return new ResponseEntity<>(JSONObject.fromObject(result),
+				result.intValue() > 0 ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE);
 	}
 	
 	@RequestMapping(value="{id}",method=RequestMethod.POST)

@@ -54,7 +54,7 @@ dependencies {
 	compile 'commons-collections:commons-collections:3.2.1'
 	compile 'commons-codec:commons-codec:1.10'	
 	
-	compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.4',classifier:'jdk17'
+	compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.4',classifier:'jdk15'
 	compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
 	 
 	providedCompile 'javax.servlet:servlet-api:2.5'

@@ -16,6 +16,8 @@ import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmRoleService;
 import com.gzhu.bm.vo.BmRoleVO;
 
+import net.sf.json.JSONObject;
+
 @RestController
 @RequestMapping("role")
 public class BmRoleController {
@@ -44,8 +46,9 @@ public class BmRoleController {
 	}
 	
 	@RequestMapping(value="update",method=RequestMethod.PUT)
-	public ResponseEntity<Integer> update(@ModelAttribute BmRoleVO bmRoleVO){
+	public ResponseEntity<JSONObject> update(@ModelAttribute BmRoleVO bmRoleVO) {
 		Integer result = bmRoleService.updateRole(bmRoleVO);
-		return new ResponseEntity<>(result,result.intValue()>0?HttpStatus.OK:HttpStatus.SERVICE_UNAVAILABLE);
+		return new ResponseEntity<>(JSONObject.fromObject(result),
+				result.intValue() > 0 ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE);
 	}
 }

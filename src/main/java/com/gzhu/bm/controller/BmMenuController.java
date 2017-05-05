@@ -16,6 +16,8 @@ import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmMenuService;
 import com.gzhu.bm.vo.BmMenuVO;
 
+import net.sf.json.JSONObject;
+
 @RestController
 @RequestMapping("menu")
 public class BmMenuController {
@@ -44,8 +46,9 @@ public class BmMenuController {
 	}
 	
 	@RequestMapping(value="update",method=RequestMethod.PUT)
-	public ResponseEntity<Integer> update(@ModelAttribute BmMenuVO bmOrderVO){
+	public ResponseEntity<JSONObject> update(@ModelAttribute BmMenuVO bmOrderVO) {
 		Integer result = bmMenuService.updateMenu(bmOrderVO);
-		return new ResponseEntity<>(result,result.intValue()>0?HttpStatus.OK:HttpStatus.SERVICE_UNAVAILABLE);
+		return new ResponseEntity<>(JSONObject.fromObject(result),
+				result.intValue() > 0 ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE);
 	}
 }

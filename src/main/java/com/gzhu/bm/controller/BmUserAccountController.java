@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gzhu.bm.service.BmUserAccountService;
 import com.gzhu.bm.vo.BmUserAccountVO;
 
+import net.sf.json.JSONObject;
+
 @RestController
 @RequestMapping("userAccount")
 public class BmUserAccountController {
@@ -32,8 +34,9 @@ public class BmUserAccountController {
 	}
 	
 	@RequestMapping(value="update",method=RequestMethod.PUT)
-	public ResponseEntity<Integer> update(@ModelAttribute BmUserAccountVO bmUserAccountVO){
+	public ResponseEntity<JSONObject> update(@ModelAttribute BmUserAccountVO bmUserAccountVO) {
 		Integer result = bmUserAccountService.updateByIdSelective(bmUserAccountVO);
-		return new ResponseEntity<>(result,result.intValue()>0?HttpStatus.OK:HttpStatus.SERVICE_UNAVAILABLE);
+		return new ResponseEntity<>(JSONObject.fromObject(result),
+				result.intValue() > 0 ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE);
 	}
 }
