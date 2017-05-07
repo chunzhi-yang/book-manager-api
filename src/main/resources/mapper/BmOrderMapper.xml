@@ -51,7 +51,7 @@
   	select count(*) from bm_order 
   	<include refid="queryParams"></include>
   </select>
-   <select id="selectPage" resultType="java.lang.Integer">
+   <select id="selectPage" resultMap="BaseResultMap">
   	select * from bm_order 
   	<include refid="queryParams"></include>
   	limit ${page.pageSize*(page.page -1)},${page.pageSize}

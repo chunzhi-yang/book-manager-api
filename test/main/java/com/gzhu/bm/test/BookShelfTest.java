@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BookShelfService;
 import com.gzhu.bm.vo.BookShelfVO;
-import com.gzhu.bm.vo.BooksVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:beans.xml")
@@ -26,9 +25,9 @@ public class BookShelfTest {
 	@Test
 	public void testSelect(){
 		int count = bookShelfService.selectCount("20170425230453000");
-		PaginationBean<BooksVO> paginationBean= new PaginationBean<BooksVO>(1,10,count);
+		PaginationBean<BookShelfVO> paginationBean = new PaginationBean<BookShelfVO>(1, 10, count);
 	 
-		List<BooksVO>  list = new ArrayList<BooksVO>();
+		List<BookShelfVO> list = new ArrayList<BookShelfVO>();
 		if(count > 0){		
 			list = bookShelfService.selectByUid("20170425230453000", paginationBean);
 		}

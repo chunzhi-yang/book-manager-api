@@ -16,9 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.gzhu.bm.Constants;
+import com.gzhu.bm.service.BmImgsService;
 import com.gzhu.bm.service.UsersService;
 import com.gzhu.bm.util.FileUtil;
-import com.gzhu.bm.util.ResponseEnvelope;
+import com.gzhu.bm.vo.BmImgsVO;
 import com.gzhu.bm.vo.UsersVO;
 
 @RestController
@@ -29,6 +30,8 @@ public class UserInfoController {
 		
 	@Autowired 
 	UsersService usersService;
+	@Autowired
+	BmImgsService bmImgsService;
 	
 	private String saveFile(MultipartFile file,String basePath) throws Exception{
 		if(file.isEmpty()){
@@ -61,6 +64,13 @@ public class UserInfoController {
 		
 		String fileName = saveFile(file,Constants.IMG_PATH);  	
 		JSONWrappedObject obj = new JSONWrappedObject("", "", fileName);
+		insertBmImgs(fileName);
 		return new ResponseEntity<>(obj,HttpStatus.OK);
+	}
+
+	private void insertBmImgs(String fileName) {
+		BmImgsVO bmImgsVO = new BmImgsVO();
+		bmImgsVO.setImgPath(fileName);
+		bmImgsService.createSelective(bmImgsVO);
 	}
 }

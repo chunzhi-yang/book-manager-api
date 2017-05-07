@@ -33,8 +33,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gzhu.bm.exception.BizException;
 import com.gzhu.bm.security.util.MD5Helper;
 import com.gzhu.bm.security.util.RSAUtil;
+import com.gzhu.bm.service.BmUserAccountService;
 import com.gzhu.bm.service.UsersService;
 import com.gzhu.bm.util.ResponseEnvelope;
+import com.gzhu.bm.vo.BmUserAccountVO;
 import com.gzhu.bm.vo.RSAPublicKeyVo;
 import com.gzhu.bm.vo.UsersVO;
 
@@ -49,6 +51,8 @@ public class LoginController {
 	
 	@Autowired
 	UsersService usersService;
+	@Autowired
+	BmUserAccountService userAccountService;
 	
 	@RequestMapping(value="signin",method=RequestMethod.POST)
 	public ResponseEntity<ResponseEnvelope<Integer>> login(HttpServletRequest request,String userName,String password,Boolean rememberMe) throws Exception{
@@ -109,6 +113,7 @@ public class LoginController {
 			calendar.set(1970,01,01);
 			usersVo.setBirth(calendar.getTime());
 			usersVo.setUid(sb.toString());
+			insertBmAccount(usersVo.getUid());
 			result.setData(usersService.createSelective(usersVo)); 
 			result.setSuccess(true);
 		}catch(Exception e){
@@ -119,6 +124,12 @@ public class LoginController {
 		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
 	 
+	private void insertBmAccount(String uid) {
+		BmUserAccountVO bmUserAccount = new BmUserAccountVO();
+		bmUserAccount.setUid(uid);
+		userAccountService.createSelective(bmUserAccount);
+	}
+
 	@RequestMapping(value = "/getRSAPublicKey", method = RequestMethod.GET) 
 	public RSAPublicKeyVo getRSAPublicKey(HttpServletRequest request) {
 		ServletContext sct = request.getSession().getServletContext();   

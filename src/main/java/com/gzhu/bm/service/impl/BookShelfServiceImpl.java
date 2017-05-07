@@ -12,7 +12,6 @@ import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BookShelfService;
 import com.gzhu.bm.util.BeanMapper;
 import com.gzhu.bm.vo.BookShelfVO;
-import com.gzhu.bm.vo.BooksVO;
 @Service
 public class BookShelfServiceImpl implements BookShelfService {
 	
@@ -20,8 +19,8 @@ public class BookShelfServiceImpl implements BookShelfService {
 	BookShelfMapper bookShelfMapper;
 	
 	@Override
-	public List<BooksVO> selectByUid(String uid, PaginationBean<BooksVO> page) {
-		return BeanMapper.mapList(bookShelfMapper.selectByUid(uid, page), BooksVO.class);
+	public List<BookShelfVO> selectByUid(String uid, PaginationBean<BookShelfVO> page) {
+		return BeanMapper.mapList(bookShelfMapper.selectByUid(uid, page), BookShelfVO.class);
 	}
 
 	@Override
