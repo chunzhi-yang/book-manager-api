@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gzhu.bm.Constants;
+import com.gzhu.bm.service.BmFilesService;
 import com.gzhu.bm.util.FileUtil;
 
 @RestController
@@ -22,6 +23,8 @@ import com.gzhu.bm.util.FileUtil;
 public class FileReadController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+	@Autowired
+	private BmFilesService bmFilesService;
 
 	@RequestMapping(value="downloadAvatar", method=RequestMethod.GET)
 	public void downloadAvatar(String url,HttpServletResponse response){
@@ -75,5 +78,32 @@ public class FileReadController {
         }catch(Exception e){
         	logger.info("download failed due to:",e);        	
         }               
+	}
+
+	@RequestMapping(value = "downloadFileById/{id}", method = RequestMethod.GET)
+	public void downloadBookById(Long id, HttpServletResponse response) {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/plain");
+		String url = bmFilesService.selectById(id).getFilePath();
+		response.setHeader("Content-Disposition", "attachment;fileName=" + url);
+		logger.info("Download file, and the url is:" + url);
+		try {
+			File file = FileUtil.getFile(Constants.FILE_PATH, url);
+
+			logger.info("file path is:" + file.getPath());
+			InputStream inputStream = new FileInputStream(file);
+			OutputStream os = response.getOutputStream();
+			byte[] b = new byte[2048];
+			int length = 0;
+			while ((length = inputStream.read(b)) > 0) {
+				os.write(b, 0, length);
+			}
+			os.flush();
+			os.close();
+			inputStream.close();
+			logger.info("Download  succeed.");
+		} catch (Exception e) {
+			logger.info("download failed due to:", e);
+		}
 	}
 }

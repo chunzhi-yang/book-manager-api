@@ -4,11 +4,10 @@ import java.util.List;
 
 import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.vo.BookShelfVO;
-import com.gzhu.bm.vo.BooksVO;
 
 public interface BookShelfService {
 	
-	List<BooksVO> selectByUid(String uid,PaginationBean<BooksVO> page);
+	List<BookShelfVO> selectByUid(String uid, PaginationBean<BookShelfVO> page);
 	
 	int createSelective(BookShelfVO bookShelf);
 	

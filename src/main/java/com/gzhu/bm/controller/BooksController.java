@@ -71,6 +71,7 @@ public class BooksController {
 		return fileName;
 	}
 
+
  
 
 	@RequestMapping(value="update",method=RequestMethod.PUT)
@@ -86,5 +87,14 @@ public class BooksController {
 	@RequestMapping(value="{id}",method=RequestMethod.POST)
 	public ResponseEntity<BooksVO> getById(@PathVariable Long id){
 		return new ResponseEntity<BooksVO>(booksService.selectById(id),HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "listByArray", method = RequestMethod.POST)
+	public ResponseEntity<List<BooksVO>> getById(String ids) {
+		List<BooksVO> list = new ArrayList<>();
+		for (String id : ids.split(",")) {
+			list.add(booksService.selectById(Long.parseLong(id)));
+		}
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 }
