@@ -1,6 +1,8 @@
 package com.gzhu.bm.test;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,8 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
+import com.gzhu.bm.exception.BizException;
 import com.gzhu.bm.service.BmFilesService;
+import com.gzhu.bm.util.FileUtil;
 import com.gzhu.bm.vo.BmFilesVO;
+import com.gzhu.bm.vo.ChapterVO;
+
+ 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:beans.xml")
@@ -42,5 +50,18 @@ public class BmFilesTest {
 	public void testSelect(){
 		BmFilesVO result = bmFilesService.selectById(2l); 
 		System.out.println(result.getFilePath());
+	}
+	
+	@Test
+	public void parseChapter() throws BizException{
+		List<ChapterVO> list = new ArrayList<>();
+		for(int page = 1;page< 3;page++){
+			list.addAll(FileUtil.getChaptersByFilePath("重生之娇娇女.txt", "20170425231430000"));
+		}
+		if(list.size() > 0){
+			System.out.println(JSON.toJSON(list).toString());
+		}else{
+			System.out.println("解析失败!");
+		}
 	}
 }
