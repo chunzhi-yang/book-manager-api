@@ -1,8 +1,8 @@
 package com.gzhu.bm.test;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,6 @@ import com.gzhu.bm.exception.BizException;
 import com.gzhu.bm.service.BmFilesService;
 import com.gzhu.bm.util.FileUtil;
 import com.gzhu.bm.vo.BmFilesVO;
-import com.gzhu.bm.vo.ChapterVO;
 
  
 
@@ -54,14 +53,11 @@ public class BmFilesTest {
 	
 	@Test
 	public void parseChapter() throws BizException{
-		List<ChapterVO> list = new ArrayList<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		for(int page = 1;page< 3;page++){
-			list.addAll(FileUtil.getChaptersByFilePath("重生之娇娇女.txt", "20170425231430000"));
+			map = FileUtil.getChaptersByFilePath("重生之娇娇女.txt", "20170425231430000");
 		}
-		if(list.size() > 0){
-			System.out.println(JSON.toJSON(list).toString());
-		}else{
-			System.out.println("解析失败!");
-		}
+		System.out.println(JSON.toJSON(map));
+		
 	}
 }
