@@ -6,7 +6,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -75,19 +77,24 @@ public final class FileUtil {
 		}
 	}
 	
-	public static List<ChapterVO> getChaptersByFilePath(String fileName,String uid) throws BizException{
+	public static Map<String, Object> getChaptersByFilePath(String fileName, String uid) throws BizException {
 		List<ChapterVO> list = new ArrayList<>();
 		BufferedReader  reader = null;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
 			File file = new File(Constants.FILE_PATH+File.separator+uid +File.separator + fileName);
 			 
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
+			StringBuffer fileContent = new StringBuffer();
 			String temp = null;
 			while((temp = reader.readLine()) != null){				
 				double process = (double)temp.length()/(double)file.getTotalSpace();
+				fileContent.append(temp);
 				list.addAll(processContent(temp,process));
 			}
-			
+
+			resultMap.put("fileContent", fileContent);
+			resultMap.put("chapters", list);
 		} catch (IOException e) {
 			log.error(e.getMessage(),e);
 		}finally{
@@ -97,7 +104,7 @@ public final class FileUtil {
 				log.error(e.getMessage(),e);
 			}
 		}
-		return list;
+		return resultMap;
 		
 	}
 
