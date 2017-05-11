@@ -85,12 +85,12 @@ public class FileReadController {
 
 
 
-	@RequestMapping(value = "bookWithChapters", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> getChapters(@RequestParam String fileName, @RequestParam String uid)
+	@RequestMapping(value = "bookWithChapters", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> getChapters(@RequestParam String fileName)
 			throws BizException {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
-			resultMap = FileUtil.getChaptersByFilePath(fileName, uid);
+			resultMap = FileUtil.getChaptersByFilePath(fileName);
 		} catch (BizException e) {
 			logger.error(e.getMessage(), e);
 			throw e;

@@ -55,7 +55,7 @@ public class BmFilesTest {
 	public void parseChapter() throws BizException{
 		Map<String,Object> map = new HashMap<String,Object>();
 		for(int page = 1;page< 3;page++){
-			map = FileUtil.getChaptersByFilePath("重生之娇娇女.txt", "20170425231430000");
+			map = FileUtil.getChaptersByFilePath("20170425231430000/重生之娇娇女.txt");
 		}
 		System.out.println(JSON.toJSON(map));
 		

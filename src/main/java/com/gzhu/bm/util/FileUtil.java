@@ -76,13 +76,37 @@ public final class FileUtil {
 			file.delete();
 		}
 	}
-	
-	public static Map<String, Object> getChaptersByFilePath(String fileName, String uid) throws BizException {
+	public static String getAuthorsByFilesPath(String path) throws BizException {
+		String author = "";
+		BufferedReader  reader = null;
+		try {
+		 
+			File file = new File(path);
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+			String temp = null;
+			while ((temp = reader.readLine()) != null) {
+				if (temp.contains("作者：")) {
+					author = temp.substring(temp.lastIndexOf("：") + 1, temp.length());
+					break;
+				}
+			}			
+		}catch(IOException e){
+			log.error(e.getMessage(),e);
+		}finally{
+			try {
+				reader.close();
+			} catch (IOException e) {
+				log.error(e.getMessage(),e);
+			}
+		}
+		return author;
+	}
+	public static Map<String, Object> getChaptersByFilePath(String fileName) throws BizException {
 		List<ChapterVO> list = new ArrayList<>();
 		BufferedReader  reader = null;
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
-			File file = new File(Constants.FILE_PATH+File.separator+uid +File.separator + fileName);
+			File file = new File(Constants.FILE_PATH+File.separator + fileName);
 			 
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 			StringBuffer fileContent = new StringBuffer();

@@ -24,15 +24,16 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.gzhu.bm.Constants;
+import com.gzhu.bm.exception.BizException;
 import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmFilesService;
 import com.gzhu.bm.service.BookShelfService;
+import com.gzhu.bm.service.BooksService;
 import com.gzhu.bm.util.FileUtil;
 import com.gzhu.bm.vo.BmFilesVO;
 import com.gzhu.bm.vo.BookShelfListVO;
 import com.gzhu.bm.vo.BookShelfVO;
-
-import net.sf.json.JSONObject;
+import com.gzhu.bm.vo.BooksVO;
 
 @RestController
 @RequestMapping("bookShelf")
@@ -42,6 +43,8 @@ public class BookShelfController {
 	BookShelfService bookShelfService;
 	@Autowired
 	BmFilesService bmFileService;
+	@Autowired
+	BooksService booksService;
 	
 	@RequestMapping(value="list/{uid}",method=RequestMethod.POST)
 	public ResponseEntity<PaginationBean<BookShelfVO>> getList(@PathVariable String uid,
@@ -62,29 +65,38 @@ public class BookShelfController {
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> upload(HttpServletRequest request,HttpServletResponse resp) throws Exception {
 		 CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
-		 List<Integer> ids = new ArrayList<Integer>();
-		// 判断 request 是否有文件上传,即多部分请求
+		 List<BooksVO> list = new ArrayList<>();
+		// 判断 request 是否有文件上传,即多部分请求Long
 		if (multipartResolver.isMultipart(request)) {
 			// 转换成多部分request
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			// 取得request中的所有文件名
-			Iterator<String> iter = multiRequest.getFileNames();
+			Iterator<String> iter = multiRequest.getFileNames();			 
 			while (iter.hasNext()) {
 				MultipartFile file = multiRequest.getFile(iter.next());
-				String fileName = saveFile(file, Constants.FILE_PATH);
-				ids.add(insertBmFiles(fileName));
+				String fileName = file.getOriginalFilename();
+				String savedName = saveFile(file, Constants.FILE_PATH);					 
+				insertBmFiles(savedName);
+				BooksVO book = new BooksVO();
+				book.setAuthor(FileUtil.getAuthorsByFilesPath(Constants.FILE_PATH+File.separator+savedName));
+				book.setBookName(fileName.substring(0,fileName.lastIndexOf(".")));
+				book.setFilePath(savedName);
+				booksService.createSelective(book);
+				book = booksService.selectByFilePath(savedName);
+				list.add(book);				
 			}
 		}
-		 
-		JSONWrappedObject obj = new JSONWrappedObject("", "", ids);
+		
+		JSONWrappedObject obj = new JSONWrappedObject("", "", list);
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
+ 
 
 	private String saveFile(MultipartFile file, String basePath) throws Exception {
 		if (file.isEmpty()) {
 			return "";
 		}
-		String fileName = FileUtil.randomFileName() + FileUtil.getFileType(file.getOriginalFilename());
+		String fileName = FileUtil.randomFileName()+ FileUtil.getFileType(file.getOriginalFilename());	
 		File targetFile = new File(basePath, fileName);
 		if (!targetFile.exists()) {
 			targetFile.createNewFile();
@@ -93,11 +105,13 @@ public class BookShelfController {
 		return fileName;
 	}
 	
-	private int insertBmFiles(String fileName) {
+	private void insertBmFiles(String fileName) {
 		BmFilesVO bmFilesVO = new BmFilesVO();
 		bmFilesVO.setFilePath(fileName);
-		return bmFileService.createSelective(bmFilesVO);
+		bmFileService.createSelective(bmFilesVO);
 	}
+	
+  
 
 	@RequestMapping(value="createBatch",method=RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> create(@RequestBody BookShelfListVO vo) {

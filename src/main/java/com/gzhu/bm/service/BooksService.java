@@ -11,9 +11,13 @@ public interface BooksService {
 	
 	BooksVO selectById(long id);
 	
+	BooksVO selectByFilePath(String filePath);
+	
 	List<BooksVO> selectPage(BooksVO books,PaginationBean<BooksVO> page);
 	
 	int selectCount(BooksVO books);
 
 	Integer update(BooksVO booksVO);
+	
+	
 }
