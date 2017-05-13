@@ -1,6 +1,5 @@
 package com.gzhu.bm.test;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,11 +53,11 @@ public class BmFilesTest {
 	
 	@Test
 	public void parseChapter() throws BizException{
-		List<ChapterVO> list = new ArrayList<>();
-		for(int page = 1;page< 3;page++){
-			list.addAll(FileUtil.getChaptersByFilePath("重生之娇娇女.txt", "20170425231430000"));
-		}
+		Long start = System.currentTimeMillis();
+		List<ChapterVO> list = FileUtil.getChaptersByFilePath("九仙图.txt", "20170425231430000");
+
 		if(list.size() > 0){
+			System.out.println((System.currentTimeMillis() - start) / 3600);
 			System.out.println(JSON.toJSON(list).toString());
 		}else{
 			System.out.println("解析失败!");

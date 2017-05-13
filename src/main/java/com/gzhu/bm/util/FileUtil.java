@@ -1,17 +1,19 @@
 package com.gzhu.bm.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,25 +78,33 @@ public final class FileUtil {
 			file.delete();
 		}
 	}
-	
-	public static Map<String, Object> getChaptersByFilePath(String fileName, String uid) throws BizException {
+
+	/**
+	 * 
+	 * @param fileName
+	 * @param uid不是个人云盘传-1，否则传uid
+	 * @return
+	 * @throws BizException
+	 */
+	public static List<ChapterVO> getChaptersByFilePath(String fileName, String uid) throws BizException {
 		List<ChapterVO> list = new ArrayList<>();
 		BufferedReader  reader = null;
-		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
-			File file = new File(Constants.FILE_PATH+File.separator+uid +File.separator + fileName);
-			 
+			File file = null;
+			if (uid.equals("-1")) {
+				file = new File(Constants.FILE_PATH + File.separator + fileName);
+			} else {
+				file = new File(Constants.FILE_PATH + File.separator + uid + File.separator + fileName);
+			}
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
-			StringBuffer fileContent = new StringBuffer();
+			StringBuffer content = new StringBuffer();
 			String temp = null;
 			while((temp = reader.readLine()) != null){				
-				double process = (double)temp.length()/(double)file.getTotalSpace();
-				fileContent.append(temp);
+				double process = (double) temp.length() / (double) file.getTotalSpace();
 				list.addAll(processContent(temp,process));
+				content.append(temp + "\n");
 			}
-
-			resultMap.put("fileContent", fileContent);
-			resultMap.put("chapters", list);
+			list = processFiles(list, new String(content), fileName);
 		} catch (IOException e) {
 			log.error(e.getMessage(),e);
 		}finally{
@@ -104,8 +114,54 @@ public final class FileUtil {
 				log.error(e.getMessage(),e);
 			}
 		}
-		return resultMap;
+		return list;
 		
+	}
+
+	private static List<ChapterVO> processFiles(List<ChapterVO> chapters, String content, String fileName)
+			throws IOException {
+		String[] valueArr = content.split("\n");
+		List<Integer> idxList = new ArrayList<Integer>();
+		for(ChapterVO vo:chapters){
+			
+			for(int i=0;i<valueArr.length;i++){
+				if(vo.getChapterName().equals(valueArr[i])){
+					idxList.add(i);
+				}
+			}
+		}
+
+		for (int i = 0; i <= idxList.size() - 1; i++) {
+			ChapterVO vo = chapters.get(i); 
+			StringBuffer chapterContent = new StringBuffer("<h5>"+vo.getChapterName()+"</h5>");
+			for (int j = idxList.get(i); i != idxList.size() - 1 && j < idxList.get(i + 1); j++) {
+				if(!valueArr[j].equals(vo.getChapterName())){
+					chapterContent.append("<p>"+valueArr[j]+"</p>"); 
+				}
+			}
+			vo.setFileName(fileName.substring(0, fileName.lastIndexOf(".")) + "_" + i + getFileType(fileName));
+			addContentToFile(chapterContent, fileName + "_" + i);
+		}
+		return chapters;
+	}
+
+	private static void addContentToFile(StringBuffer chapterContent, String fileName) {
+		File file = new File(Constants.FILE_PATH + File.separator + fileName);
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(file));
+			writer.write(new String(chapterContent));
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		} finally {
+			try {
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				log.error(e.getMessage(), e);
+			}
+
+		}
 	}
 
 	private static List<ChapterVO> processContent(String values,double process) {
@@ -114,8 +170,8 @@ public final class FileUtil {
 		
 		String[] valueArr = values.split(System.getProperty("line.separator"));
 		int length = valueArr.length;
-		for(Pattern pattern: chapterPattern){			
-			for(int i=0;i <= length -1;i++){
+		for (int i = 0; i <= length - 1; i++) {
+			for (Pattern pattern : chapterPattern) {
 				String value=valueArr[i];
 				if(pattern.matcher(value).matches()){
 					ChapterVO vo = new ChapterVO();
@@ -134,5 +190,21 @@ public final class FileUtil {
 			}			
 		}
 		return list;
+	}
+
+	public static String getOneChapter(String fileName) throws IOException {
+		StringBuffer content = new StringBuffer();
+		String temp = null;
+		try {
+			BufferedReader reader = new BufferedReader(
+					new FileReader(new File(Constants.FILE_PATH + File.separator + fileName)));
+			while (StringUtils.isNotBlank(temp = reader.readLine())) {
+				content.append(temp);
+			}
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+			throw e;
+		}
+		return new String(content);
 	}
 }

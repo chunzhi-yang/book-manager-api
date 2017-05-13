@@ -58,6 +58,7 @@ public class BookShelfController {
 		List<Integer> ids = new ArrayList<Integer>();
 		for (CommonsMultipartFile file : files) {
 			String fileName = saveFile(file, Constants.FILE_PATH);
+
 			ids.add(insertBmFiles(fileName));
 		}
 		JSONWrappedObject obj = new JSONWrappedObject("", "", ids);

@@ -11,6 +11,8 @@ public class ChapterVO implements java.io.Serializable{
 	
 	private Double process;
 
+	private String fileName;
+
 	public Double getProcess() {
 		return process;
 	}
@@ -25,6 +27,14 @@ public class ChapterVO implements java.io.Serializable{
 
 	public void setChapterName(String chapterName) {
 		this.chapterName = chapterName;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }
