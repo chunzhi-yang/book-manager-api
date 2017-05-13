@@ -73,4 +73,6 @@ public class UserInfoController {
 		bmImgsVO.setImgPath(fileName);
 		bmImgsService.createSelective(bmImgsVO);
 	}
+	
+	
 }

@@ -43,4 +43,11 @@ public class BooksServiceImpl implements BooksService {
 		return booksMapper.updateByPrimaryKeySelective(BeanMapper.map(booksVO, Books.class)); 
 	}
 
+	@Override
+	public BooksVO selectByFilePath(String filePath) {
+		Books books = new Books();
+		books.setFilePath(filePath);
+		return BeanMapper.map(booksMapper.selectOne(books),BooksVO.class);
+	}
+
 }

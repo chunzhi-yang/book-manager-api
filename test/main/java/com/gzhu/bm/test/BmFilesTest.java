@@ -1,7 +1,8 @@
 package com.gzhu.bm.test;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +15,6 @@ import com.gzhu.bm.exception.BizException;
 import com.gzhu.bm.service.BmFilesService;
 import com.gzhu.bm.util.FileUtil;
 import com.gzhu.bm.vo.BmFilesVO;
-import com.gzhu.bm.vo.ChapterVO;
 
  
 

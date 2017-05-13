@@ -78,7 +78,32 @@ public final class FileUtil {
 			file.delete();
 		}
 	}
-
+	public static String getAuthorsByFilesPath(String path) throws BizException {
+		String author = "";
+		BufferedReader  reader = null;
+		try {
+		 
+			File file = new File(path);
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+			String temp = null;
+			while ((temp = reader.readLine()) != null) {
+				if (temp.contains("作者：")) {
+					author = temp.substring(temp.lastIndexOf("：") + 1, temp.length());
+					break;
+				}
+			}			
+		}catch(IOException e){
+			log.error(e.getMessage(),e);
+		}finally{
+			try {
+				reader.close();
+			} catch (IOException e) {
+				log.error(e.getMessage(),e);
+			}
+		}
+		return author;
+	}
+	
 	/**
 	 * 
 	 * @param fileName
