@@ -5,14 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.gzhu.bm.service.BmUserAccountService;
 import com.gzhu.bm.vo.BmUserAccountVO;
-
-import net.sf.json.JSONObject;
 
 @RestController
 @RequestMapping("userAccount")
@@ -33,10 +33,9 @@ public class BmUserAccountController {
 		return new ResponseEntity<>(result,result.intValue()>0?HttpStatus.OK:HttpStatus.SERVICE_UNAVAILABLE);
 	}
 	
-	@RequestMapping(value="update",method=RequestMethod.PUT)
-	public ResponseEntity<JSONObject> update(@ModelAttribute BmUserAccountVO bmUserAccountVO) {
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public ResponseEntity<JSONWrappedObject> update(@RequestBody BmUserAccountVO bmUserAccountVO) {
 		Integer result = bmUserAccountService.updateByIdSelective(bmUserAccountVO);
-		return new ResponseEntity<>(JSONObject.fromObject(result),
-				result.intValue() > 0 ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE);
+		return new ResponseEntity<>(new JSONWrappedObject("", "", result), HttpStatus.OK);
 	}
 }

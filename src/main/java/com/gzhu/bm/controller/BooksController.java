@@ -97,4 +97,16 @@ public class BooksController {
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "listByFilePath", method = RequestMethod.POST)
+	public ResponseEntity<List<BooksVO>> getByPath(String ids) {
+		List<BooksVO> list = new ArrayList<>();
+		for (String id : ids.split(",")) {
+			BooksVO vo = booksService.selectByFilePath(id);
+			if (vo != null) {
+				list.add(vo);
+			}
+		}
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
 }

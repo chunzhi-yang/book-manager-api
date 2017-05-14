@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
 import com.gzhu.bm.service.BmUserAccountService;
 import com.gzhu.bm.vo.BmUserAccountVO;
 
@@ -20,7 +21,7 @@ public class BmUserAccountTest {
 	BmUserAccountService bmUserAccountService;
 	@Test
 	public void testSelect(){
-		bmUserAccountService.selectByUid("20170425231430000");
+		System.out.println(JSON.toJSON(bmUserAccountService.selectByUid("20170425231430000")));
 	}
 	
 	@Test

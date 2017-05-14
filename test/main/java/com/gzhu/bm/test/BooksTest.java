@@ -1,8 +1,8 @@
 package com.gzhu.bm.test;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class BooksTest {
 		booksVO.setAuthor("chunzhi");
 		booksVO.setBookName("有神1111");
 		booksVO.setCategory(Byte.valueOf("2"));
-		booksVO.setFilePath("111.txt");
+		booksVO.setFilePath("20170425231432000" + File.separator + "2070e07684e74fe6a7cd5265b62ac958.txt");
 		booksVO.setCost(BigDecimal.valueOf(0.1d)); 
 		booksVO.setDescription("大话已有");
 		booksVO.setFreeChapters(1l);

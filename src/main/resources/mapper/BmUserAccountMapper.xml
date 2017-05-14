@@ -9,7 +9,7 @@
     <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="remain" property="remain" jdbcType="DECIMAL" />
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
-    <result column="uodated_time" property="uodatedTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="queryParams">
   	 
@@ -25,8 +25,8 @@
   		<if test="record.createdTime != null">
   			and created_time =#{record.createdTime,jdbcType=TIMESTAMP}
   		</if>
-  		<if test="record.uodatedTime != null">
-  			and uodated_time =#{record.uodatedTime,jdbcType=TIMESTAMP}
+  		<if test="record.updatedTime != null">
+  			and updated_time =#{record.updatedTime,jdbcType=TIMESTAMP}
   		</if>
   	 
   </sql>

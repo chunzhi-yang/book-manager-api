@@ -24,7 +24,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.gzhu.bm.Constants;
-import com.gzhu.bm.exception.BizException;
 import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmFilesService;
 import com.gzhu.bm.service.BookShelfService;
@@ -66,6 +65,7 @@ public class BookShelfController {
 	public ResponseEntity<JSONWrappedObject> upload(HttpServletRequest request,HttpServletResponse resp) throws Exception {
 		 CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
 		 List<BooksVO> list = new ArrayList<>();
+		String uid = request.getParameter("uid");
 		// 判断 request 是否有文件上传,即多部分请求Long
 		if (multipartResolver.isMultipart(request)) {
 			// 转换成多部分request
@@ -75,14 +75,18 @@ public class BookShelfController {
 			while (iter.hasNext()) {
 				MultipartFile file = multiRequest.getFile(iter.next());
 				String fileName = file.getOriginalFilename();
-				String savedName = saveFile(file, Constants.FILE_PATH);					 
+				String path = Constants.FILE_PATH;
+				if (!"-1".equals(uid)) {
+					path = path + File.separator + uid;
+				}
+				String savedName = saveFile(file, path);
 				insertBmFiles(savedName);
 				BooksVO book = new BooksVO();
-				book.setAuthor(FileUtil.getAuthorsByFilesPath(Constants.FILE_PATH+File.separator+savedName));
+				book.setAuthor(FileUtil.getAuthorsByFilesPath(path + File.separator + savedName));
 				book.setBookName(fileName.substring(0,fileName.lastIndexOf(".")));
-				book.setFilePath(savedName);
+				book.setFilePath(uid + File.separator + savedName);
 				booksService.createSelective(book);
-				book = booksService.selectByFilePath(savedName);
+				book = booksService.selectByFilePath(book.getFilePath());
 				list.add(book);				
 			}
 		}

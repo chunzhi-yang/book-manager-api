@@ -107,33 +107,31 @@ public final class FileUtil {
 	/**
 	 * 
 	 * @param fileName
-	 * @param uid不是个人云盘传-1，否则传uid
 	 * @return
 	 * @throws BizException
 	 */
-	public static List<ChapterVO> getChaptersByFilePath(String fileName, String uid) throws BizException {
+	public static List<ChapterVO> getChaptersByFilePath(String fileName) throws BizException {
 		List<ChapterVO> list = new ArrayList<>();
-		BufferedReader  reader = null;
+		InputStreamReader reader = null;
 		try {
-			File file = null;
-			if (uid.equals("-1")) {
-				file = new File(Constants.FILE_PATH + File.separator + fileName);
-			} else {
-				file = new File(Constants.FILE_PATH + File.separator + uid + File.separator + fileName);
+			File file = new File(Constants.FILE_PATH + File.separator + fileName);
+			reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+			log.info("reading file: " + fileName);
+			char[] charArr = new char[2048];
+			StringBuilder sb = new StringBuilder();
+			log.info("processing chapters and read process:");
+			while (reader.read(charArr) != -1) {
+				double process = (double) charArr.length / (double) file.getTotalSpace();
+				list.addAll(processContent(charArr, process));
+				sb.append(charArr);
 			}
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
-			StringBuffer content = new StringBuffer();
-			String temp = null;
-			while((temp = reader.readLine()) != null){				
-				double process = (double) temp.length() / (double) file.getTotalSpace();
-				list.addAll(processContent(temp,process));
-				content.append(temp + "\n");
-			}
-			list = processFiles(list, new String(content), fileName);
+			log.info("processing chapters and read process finished");
+			processFiles(list, sb, fileName);
 		} catch (IOException e) {
 			log.error(e.getMessage(),e);
 		}finally{
 			try {
+				log.info("read file: " + fileName + " finished");
 				reader.close();
 			} catch (IOException e) {
 				log.error(e.getMessage(),e);
@@ -143,12 +141,11 @@ public final class FileUtil {
 		
 	}
 
-	private static List<ChapterVO> processFiles(List<ChapterVO> chapters, String content, String fileName)
-			throws IOException {
-		String[] valueArr = content.split("\n");
+	public static void processFiles(List<ChapterVO> chapters, StringBuilder sb, String fileName) throws IOException {
+
+		String[] valueArr = sb.toString().split(System.lineSeparator());
 		List<Integer> idxList = new ArrayList<Integer>();
-		for(ChapterVO vo:chapters){
-			
+		for (ChapterVO vo : chapters) {
 			for(int i=0;i<valueArr.length;i++){
 				if(vo.getChapterName().equals(valueArr[i])){
 					idxList.add(i);
@@ -159,19 +156,27 @@ public final class FileUtil {
 		for (int i = 0; i <= idxList.size() - 1; i++) {
 			ChapterVO vo = chapters.get(i); 
 			StringBuffer chapterContent = new StringBuffer("<h5>"+vo.getChapterName()+"</h5>");
-			for (int j = idxList.get(i); i != idxList.size() - 1 && j < idxList.get(i + 1); j++) {
-				if(!valueArr[j].equals(vo.getChapterName())){
-					chapterContent.append("<p>"+valueArr[j]+"</p>"); 
+			if (i == idxList.size() - 1) {
+				for (int k = idxList.get(i); k < valueArr.length; k++)
+					chapterContent.append("<p>" + valueArr[k] + "</p>");
+			} else {
+				for (int j = idxList.get(i); i < idxList.size() - 1 && j < idxList.get(i + 1); j++) {
+					if (!valueArr[j].equals(vo.getChapterName())) {
+						chapterContent.append("<p>" + valueArr[j] + "</p>");
+					}
 				}
 			}
-			vo.setFileName(fileName.substring(0, fileName.lastIndexOf(".")) + "_" + i + getFileType(fileName));
-			addContentToFile(chapterContent, fileName + "_" + i);
+			String storedName = fileName.substring(0, fileName.lastIndexOf(".")) + "_" + i + getFileType(fileName);
+			addContentToFile(chapterContent,storedName);
 		}
-		return chapters;
 	}
 
 	private static void addContentToFile(StringBuffer chapterContent, String fileName) {
 		File file = new File(Constants.FILE_PATH + File.separator + fileName);
+		if (file.exists()) {
+			return;
+		}
+		log.info("writing file \t" + fileName + "....");
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter(file));
@@ -180,6 +185,7 @@ public final class FileUtil {
 			log.error(e.getMessage(), e);
 		} finally {
 			try {
+				log.info("writing file " + fileName + " finished");
 				writer.flush();
 				writer.close();
 			} catch (IOException e) {
@@ -189,11 +195,11 @@ public final class FileUtil {
 		}
 	}
 
-	private static List<ChapterVO> processContent(String values,double process) {
+	private static List<ChapterVO> processContent(char[] values, double process) {
 		List<ChapterVO> list = new ArrayList<>();
 		List<Pattern> chapterPattern = Constants.CHAPTER_PATTERN;
 		
-		String[] valueArr = values.split(System.getProperty("line.separator"));
+		String[] valueArr = String.valueOf(values).split(System.getProperty("line.separator"));
 		int length = valueArr.length;
 		for (int i = 0; i <= length - 1; i++) {
 			for (Pattern pattern : chapterPattern) {

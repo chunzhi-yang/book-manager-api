@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.interfaces.RSAPrivateKey;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gzhu.bm.Constants;
 import com.gzhu.bm.exception.BizException;
 import com.gzhu.bm.security.util.MD5Helper;
 import com.gzhu.bm.security.util.RSAUtil;
@@ -114,6 +116,7 @@ public class LoginController {
 			usersVo.setBirth(calendar.getTime());
 			usersVo.setUid(sb.toString());
 			insertBmAccount(usersVo.getUid());
+			createSelfFolder(usersVo.getUid());
 			result.setData(usersService.createSelective(usersVo)); 
 			result.setSuccess(true);
 		}catch(Exception e){
@@ -124,6 +127,12 @@ public class LoginController {
 		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
 	 
+	private void createSelfFolder(String uid) {
+		File file = new File(Constants.FILE_PATH + File.separator + uid);
+		file.mkdirs();
+
+	}
+
 	private void insertBmAccount(String uid) {
 		BmUserAccountVO bmUserAccount = new BmUserAccountVO();
 		bmUserAccount.setUid(uid);
