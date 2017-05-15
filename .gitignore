@@ -1,0 +1,13 @@
+/.gradle/
+/bin/
+/build/
+/.classpath
+/.project
+/.settings/gradle/org.springsource.ide.eclipse.gradle.core.import.prefs
+/.settings/gradle/org.springsource.ide.eclipse.gradle.core.prefs
+/.settings/gradle/org.springsource.ide.eclipse.gradle.refresh.prefs
+/.settings/org.eclipse.jdt.core.prefs
+/.settings/org.eclipse.ltk.core.refactoring.prefs
+/.settings/org.eclipse.wst.common.component
+/.settings/org.eclipse.wst.common.project.facet.core.xml
+/.settings/org.eclipse.wst.ws.service.policy.prefs

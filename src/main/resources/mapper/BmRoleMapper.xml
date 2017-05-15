@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzhu.bm.repo.BmRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.gzhu.bm.entity.BmRole" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="bm_role_id" property="bmRoleId" jdbcType="BIGINT" />
+    <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="queryParams">
+  	<where>
+  		1=1
+  		<if test="record.bmRoleId != null">
+  			and bm_role_id = #{record.bmRoleId,jdbcType=BIGINT}
+  		</if>
+  		<if test="record.roleCode != null">
+  			and role_code=#{record.roleCode,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.createdTime != null">
+  			and created_time = #{record.createdTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="record.status != null">
+  			and status=#{record.status,jdbcType=TINYINT}
+  		</if>
+  		<if test="record.roleName != null">
+  			and role_name = #{record.roleName,jdbcType=VARCHAR}
+  		</if>
+  		 <if test="record.uid != null">
+  			and uid = #{record.uid,jdbcType=VARCHAR}
+  		</if>
+  	  </where>
+  	</sql>
+  	<select id="selectCount" resultType="java.lang.Integer">
+  		select count(*) from bm_role
+  		<include refid="queryParams"></include>
+  	</select>
+  	<select id="selectPage" resultMap="BaseResultMap">
+  		select* from bm_role
+  		<include refid="queryParams"></include>
+  		limit ${page.pageSize*(page.page -1)},${page.pageSize}
+  	</select>
+  	<select id="selectByUid" resultMap="BaseResultMap">
+  		select* from bm_role where uid=#{uid}
+  	</select>
+  
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzhu.bm.repo.BmAccountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.gzhu.bm.entity.BmAccountLog" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="bm_account_log_id" property="bmAccountLogId" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="change_type" property="changeType" jdbcType="TINYINT" />
+    <result column="before_remain" property="beforeRemain" jdbcType="DECIMAL" />
+    <result column="after_remain" property="afterRemain" jdbcType="DECIMAL" />
+    <result column="change_time" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List">
+  	`bm_account_log_id`,
+  	`uid`,
+  	`change_type`,
+  	`before_remain`,
+  	`after_remain`,
+  	`change_time`,
+  	`pay_type`
+  </sql>
+  <sql id="queryParams">
+  	<where>
+  		1=1 	
+  	 <if test="record.bmAccountLogId != null">
+  	 	and bm_account_log_id = #{record.bmAccountLogId,jdbcType=BIGINT}
+  	 </if>	
+  	 <if test="record.uid != null">
+  	 	and uid = #{record.uid,jdbcType=VARCHAR}
+  	 </if>	
+  	 <if test="record.changeType != null">
+  	 	and change_type = #{record.changeType,jdbcType=TINYINT}
+  	 </if>	
+  	 <if test="record.beforeRemain != null">
+  	 	and before_remain = #{record.beforeRemain,jdbcType=DECIMAL}
+  	 </if>	
+  	 <if test="record.afterRemain != null">
+  	 	and after_remain = #{record.afterRemain,jdbcType=DECIMAL}
+  	 </if>	
+  	 <if test="record.changeTime != null">
+  	 	and change_time = #{record.changeTime,jdbcType=TIMESTAMP}
+  	 </if>	
+  	 <if test="record.payType != null">
+  	 	and pay_type = #{record.payType,jdbcType=BIGINT}
+  	 </if>	
+  	 </where>
+  </sql>
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from bm_account_log
+   <include refid="queryParams"></include>  	 
+  </select> 
+  <select id="selectByPage" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"></include>
+  	from bm_account_log
+  	<include refid="queryParams"></include>
+  	limit ${page.pageSize*(page.page -1)},${page.pageSize}
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"></include>
+  	from bm_account_log where uid=#{uid}
+  	</select>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzhu.bm.repo.BookShelfMapper" >
+  <resultMap id="BaseResultMap" type="com.gzhu.bm.entity.BookShelf" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="book_shelf_id" property="bookShelfId" jdbcType="BIGINT" />
+    <result column="books_id" property="booksId" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="read_process" property="readProcess" jdbcType="DECIMAL" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="selectCountByUid" resultType="java.lang.Integer" parameterType="java.lang.String">
+  	select count(*) from book_shelf bs left join users u on bs.uid = u.uid where u.uid=#{uid} 
+  </select>
+    <select id="selectByUid" resultMap="BaseResultMap">
+  	select * from book_shelf bs left join users u on bs.uid = u.uid where u.uid=#{uid} 
+  	limit ${page.pageSize*(page.page -1)},${page.pageSize}
+  </select>
+  <insert id="createBatch" parameterType="java.util.List">
+  		insert into book_shelf(
+  			books_id,
+  			uid,
+  			read_process,
+  			created_time,
+  			updated_time
+  		) values
+  		<foreach collection="list" item="record" separator=",">
+	  		(<trim  suffixOverrides=",">
+	  			<if test="record.booksId != null">
+	  				#{record.booksId},
+	  			</if>
+	  			<if test="record.booksId == null">
+	  				0,
+	  			</if>
+	  			
+	  			<if test="record.uid != null">
+	  				#{record.uid,jdbcType=VARCHAR},
+	  			</if>
+	  			<if test="record.uid == null">
+	  				0,
+	  			</if>
+	  			
+	  			<if test="record.readProcess != null">
+	  				#{record.readProcess,jdbcType=DECIMAL},
+	  			</if>
+	  			<if test="record.readProcess == null">
+	  				0,
+	  			</if>
+	  			
+	  			<if test="record.createdTime != null">
+	  				#{record.createdTime,jdbcType=TIMESTAMP},
+	  			</if>
+	  			<if test="record.createdTime == null">
+	  				'0000-00-00 00:00:00',
+	  			</if>
+	  			
+	  			<if test="record.updatedTime != null">
+	  				#{record.updatedTime,jdbcType=TIMESTAMP},
+	  			</if>
+	  			<if test="record.updatedTime == null">
+	  				''0000-00-00 00:00:00',',
+	  			</if>
+	  		</trim>)
+  		</foreach>
+  </insert>
+</mapper>

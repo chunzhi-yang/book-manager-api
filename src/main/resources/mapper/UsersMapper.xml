@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzhu.bm.repo.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.gzhu.bm.entity.Users" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="users_id" property="usersId" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="birth" property="birth" jdbcType="TIMESTAMP" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="BaseColumns">
+  	`users_id`,
+  	`uid`,
+  	`user_name`,
+  	`user_password`,
+  	`sex`,
+  	`birth`,
+  	`location`,
+  	`description`,
+  	`created_time`,
+  	`img_path`,
+  	`mobile`
+  </sql>
+ 
+  <sql id="usersQueryParams">
+  		<if test="record.usersId != null">
+  			and users_id = #{record.usersId,jdbcType=BIGINT}
+  		</if>
+  		<if test="record.uid != null">
+  			and uid= #{record.uid,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.userName != null">
+  			and user_name = #{record.userName,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.userPassword != null">
+  			and user_password =#{record.userPassword,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.sex != null">
+  			and sex = #{record.sex,jdbcType=TINYINT}
+  		</if>
+  		<if test="record.birth != null">
+  			and birth = #{record.birth,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="record.location != null">
+  			and location = #{record.location,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.description != null">
+  			and description = #{record.description,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.created_time != null">
+  			and created_time = #{record.createdTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="record.imgPath != null">
+  			and img_path = #{record.imgPath,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.mobile != null">
+  			and mobile = #{record.mobile,jdbcType=VARCHAR}
+  		</if>
+  </sql>
+  <select id="selectCount">
+  		select count(*) from users
+  		<where>
+  			<include refid="usersQueryParams"></include>
+  		</where>
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap">
+  		select * from users where uid=#{uid,jdbcType=VARCHAR}
+  </select>
+   <select id="findByAccountPassword" resultMap="BaseResultMap">
+  		select * from users where
+  		 user_name=#{userName,jdbcType=VARCHAR} 
+  		 and user_password=#{userPassword,jdbcType=VARCHAR} 
+  </select>
+   <select id="findByAccount" resultMap="BaseResultMap">
+  		select * from users  where user_name=#{userName,jdbcType=VARCHAR} 
+  </select>
+</mapper>

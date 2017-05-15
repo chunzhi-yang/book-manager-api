@@ -23,35 +23,17 @@
                         userId="${userId}"
                         password="${password}">
                 </jdbcConnection>
-
-      <!--  <javaModelGenerator targetPackage="${modelPackage}"
-                            targetProject="${src_main_java}">
-        &lt;!&ndash;    <property name="enableSubPackages" value="false" />
-            <property name="trimStrings" value="true" />&ndash;&gt;
-        </javaModelGenerator>
-        <sqlMapGenerator targetPackage="${sqlMapperPackage}"
-                         targetProject="${src_main_resources}">
-            <property name="enableSubPackages" value="false" />
-
-        </sqlMapGenerator>
-        <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="${mapperPackage}" targetProject="${src_main_java}">
-            <property name="enableSubPackages" value="false" />
-        </javaClientGenerator>
-        <table tableName="%" >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>-->
-
+		<javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+			<property name="forceBigDecimals" value="false"></property>
+		</javaTypeResolver>
         <javaModelGenerator targetPackage="${modelPackage}" targetProject="${src_main_java}"/>
 
         <sqlMapGenerator targetPackage="${sqlMapperPackage}"  targetProject="${src_main_resources}"/>
 
-        <javaClientGenerator targetPackage="${mapperPackage}" targetProject="${src_main_java}" type="XMLMAPPER" />
+        <javaClientGenerator targetPackage="${mapperPackage}" targetProject="${src_main_java}" type="XMLMAPPER"> 
+		</javaClientGenerator>	
 
-
-        <table tableName="psp_user"  >
-            <generatedKey column="sys_user_id" sqlStatement="Mysql" identity="true"/>
-
+        <table tableName="bm_files">
         </table>
 
     </context>
