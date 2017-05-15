@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzhu.bm.repo.BooksMapper" >
+  <resultMap id="BaseResultMap" type="com.gzhu.bm.entity.Books" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="books_id" property="booksId" jdbcType="BIGINT" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="TINYINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="hot_score" property="hotScore" jdbcType="BIGINT" />
+    <result column="free_chapters" property="freeChapters" jdbcType="BIGINT" />
+    <result column="order_discount" property="orderDiscount" jdbcType="DECIMAL" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="queryParams">
+  	<where>
+  		is_delete=0
+  		<if test="record.booksId != null">
+  			and books_id=#{record.booksId,jdbcType=BIGINT}
+  		</if>
+  		<if test="record.bookName != null">
+  			and book_name=#{record.bookName,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.author != null">
+  			and author=#{record.author,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.category != null">
+  			and category=#{record.category,jdbcType=TINYINT}
+  		</if>
+  		<if test="record.description != null">
+  			and description=#{record.description,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.cost != null">
+  			and cost=#{record.cost,jdbcType=DECIMAL}
+  		</if>
+  		<if test="record.imgPath != null">
+  			and img_path=#{record.imgPath,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.filePath != null">
+  			and file_path=#{record.filePath,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.createdTime != null">
+  			and created_time=#{record.createdTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="record.updatedTime != null">
+  			and updated_time=#{record.updatedTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="record.hotScore != null">
+  			and hot_score=#{record.hotScore,jdbcType=BIGINT}
+  		</if>
+  		<if test="record.orderDiscount != null">
+  			and order_discount=#{record.orderDiscount,jdbcType=DECIMAL}
+  		</if>
+  		<if test="record.freeChapters != null">
+  			and free_chapters=#{record.freeChapters,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </sql>
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from books <include refid="queryParams"></include>
+  </select>
+  <select id="selectPage" resultMap="BaseResultMap">
+  	select * from books <include refid="queryParams"></include>
+  	limit ${page.pageSize*(page.page -1)},${page.pageSize}
+  </select>
+</mapper>

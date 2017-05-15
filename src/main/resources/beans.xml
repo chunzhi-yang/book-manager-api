@@ -15,17 +15,15 @@
         ">
 	<!--<context:annotation-config/>-->
 
-	<!-- 读取配置文件 -->
-	<context:property-placeholder
-		location="classpath:jdbc.properties,classpath:common.properties" />
+	 
 
 
 
 	<!-- 扫描注解，除去web层注解，web层注解在mvc配置中扫描 -->
 	<context:component-scan
-		base-package="com.gzhu.bm.component,
+		base-package="com.gzhu.bm.aop,
 		com.gzhu.bm.service.impl,
-		com.gzhu.bm.dao.impl,
+		com.gzhu.bm.repo,
 		com.gzhu.bm.shiro">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
@@ -34,13 +32,11 @@
 	</context:component-scan>
 	
 	<!--  shiro的缓存管理 -->
-	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"></property>
     </bean>
 
-	<!-- 开启AOP监听 只对当前配置文件有效 -->
-	<aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true" /> 
-	 
+	
 	<import resource="spring-mybatis.xml" /> 
 
 	<!-- shiro安全模块定义 -->
@@ -52,7 +48,11 @@
 	<!-- 如果没有设置transaction-manager的值，则spring以缺省默认的事务管理器来处理事务，默认事务管理器为第一个加载的事务管理器 -->
 
 	<tx:annotation-driven transaction-manager="transactionManager"  />
+
+	<!-- 开启AOP监听 只对当前配置文件有效 -->
+	<aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true" /> 
  
+	 
 
  
  
