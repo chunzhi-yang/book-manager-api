@@ -36,6 +36,10 @@ public class FileReadController {
 	@Autowired
 	private BooksService booksService;
 
+	@RequestMapping("healthCheck")
+	public ResponseEntity<String> healthCk() {
+		return new ResponseEntity<>("UP", HttpStatus.OK);
+	}
 	@RequestMapping(value="downloadAvatar", method=RequestMethod.GET)
 	public void downloadAvatar(String url,HttpServletResponse response){
 		response.setCharacterEncoding("utf-8");

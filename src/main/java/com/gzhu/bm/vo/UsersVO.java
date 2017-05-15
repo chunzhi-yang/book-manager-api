@@ -18,6 +18,7 @@ public class UsersVO implements java.io.Serializable{
     private String description;
     private Date createdTime;
     private String imgPath;
+	private String mobile;
     
     private List<String> menus;
     private List<String> roles;
@@ -202,6 +203,14 @@ public class UsersVO implements java.io.Serializable{
 
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 }
      

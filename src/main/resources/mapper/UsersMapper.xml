@@ -15,6 +15,7 @@
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="BaseColumns">
   	`users_id`,
@@ -26,7 +27,8 @@
   	`location`,
   	`description`,
   	`created_time`,
-  	`img_path`
+  	`img_path`,
+  	`mobile`
   </sql>
  
   <sql id="usersQueryParams">
@@ -59,6 +61,9 @@
   		</if>
   		<if test="record.imgPath != null">
   			and img_path = #{record.imgPath,jdbcType=VARCHAR}
+  		</if>
+  		<if test="record.mobile != null">
+  			and mobile = #{record.mobile,jdbcType=VARCHAR}
   		</if>
   </sql>
   <select id="selectCount">

@@ -1,7 +1,10 @@
 package com.gzhu.bm.entity;
 
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "users")
 public class Users {
@@ -62,10 +65,24 @@ public class Users {
     private String imgPath;
 
     /**
-     * 获取主键
-     *
-     * @return users_id - 主键
-     */
+	 * 手机号
+	 */
+	@Column(name = "mobile")
+	private String mobile;
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	/**
+	 * 获取主键
+	 *
+	 * @return users_id - 主键
+	 */
     public Long getUsersId() {
         return usersId;
     }
