@@ -140,12 +140,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/getRSAPublicKey", method = RequestMethod.GET) 
-	public RSAPublicKeyVo getRSAPublicKey(HttpServletRequest request) {
+	public ResponseEntity<RSAPublicKeyVo> getRSAPublicKey(HttpServletRequest request) {
 		ServletContext sct = request.getSession().getServletContext();   
 	    // 从上下文环境中通过属性名获取属性值  
         RSAPublicKeyVo publicKeyVo = (RSAPublicKeyVo) sct.getAttribute(PUBLICKEYVO);
 		
-		return publicKeyVo;
+		return new ResponseEntity<>(publicKeyVo, HttpStatus.OK);
 	}
 	 
 	@RequestMapping(value = "/getCaptchaS", method = RequestMethod.GET)	

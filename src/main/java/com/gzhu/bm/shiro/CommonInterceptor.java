@@ -36,11 +36,11 @@ public class CommonInterceptor implements HandlerInterceptor {
      */  
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,  
             Object handler) throws Exception {  
-        response.setHeader("Access-Control-Allow-Origin", "*");  
-        response.setHeader("Access-Control-Allow-Methods", "*");  
-        response.setHeader("Access-Control-Max-Age", "3600");  
-        response.setHeader("Access-Control-Allow-Headers",  
-                "Origin, X-Requested-With, Content-Type, Accept");  
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
+		response.setHeader("Access-Control-Allow-Methods", "*");
+		response.setHeader("Access-Control-Max-Age", "3600");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
+		response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         return true;  
     }  
   

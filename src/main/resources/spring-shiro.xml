@@ -12,10 +12,11 @@
         <property name="securityManager" ref="securityManager" />  
         <property name="filterChainDefinitions">  
             <value>  
-            	/app/** = anon
+            	
             	/login/** = anon
-            	/bookshelf/** = anon
-                /** = anon 
+            	/app/** = logined
+            	/bookshelf/** = logined
+                /** = logined 
             </value>  
         </property> 
         <property name="filters">
@@ -50,7 +51,11 @@
     <!-- 自定义会话管理配置 -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"> 
         <property name="sessionDAO" ref="sessionDAO"/>
-        
+        <property name="sessionListeners">
+        	<list>
+        		<ref bean="shiroSessionListener" />
+        	</list>
+        </property>
         <!-- 会话超时时间，单位：毫秒  -->
         <property name="globalSessionTimeout" value="1800000"/>
         
