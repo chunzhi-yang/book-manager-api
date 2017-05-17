@@ -93,7 +93,9 @@ public class BooksController {
 	public ResponseEntity<List<BooksVO>> getById(String ids) {
 		List<BooksVO> list = new ArrayList<>();
 		for (String id : ids.split(",")) {
-			list.add(booksService.selectById(Long.parseLong(id)));
+			if (StringUtils.isNotBlank(id)) {
+				list.add(booksService.selectById(Long.parseLong(id)));
+			}
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}

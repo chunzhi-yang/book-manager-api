@@ -43,5 +43,15 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 		return subject.getPrincipal() != null;
 	}
 
+	@Override
+	public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+		((HttpServletResponse) response).setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
+		((HttpServletResponse) response).setHeader("Access-Control-Allow-Methods", "*");
+		((HttpServletResponse) response).setHeader("Access-Control-Max-Age", "3600");
+		((HttpServletResponse) response).setHeader("Access-Control-Allow-Credentials", "true");
+		((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers",
+				"Origin, X-Requested-With, Content-Type, Accept");
+		return super.onPreHandle(request, response, mappedValue);
+	}
   
 } 

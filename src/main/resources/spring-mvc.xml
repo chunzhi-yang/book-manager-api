@@ -54,8 +54,10 @@
           <mvc:mapping path="/**" />  
           <bean class="com.gzhu.bm.shiro.CommonInterceptor">  
           <property name="excludedUrls">  
-           <list>  
-               <value>/</value>  
+           <list>   
+                <value>/book-manager-api/+login/.*</value> 
+            	<value>/book-manager-api/+user/upload</value>
+            	<value>/book-manager-api/+bookshelf/upload</value>
            </list>  
           </property>  
           </bean>  
