@@ -57,7 +57,7 @@
            <list>   
                 <value>/book-manager-api/+login/.*</value> 
             	<value>/book-manager-api/+user/upload</value>
-            	<value>/book-manager-api/+bookshelf/upload</value>
+            	<value>/book-manager-api/+bookShelf/upload</value>
            </list>  
           </property>  
           </bean>  

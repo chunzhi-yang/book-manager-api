@@ -86,7 +86,7 @@ public class UserInfoController {
 			}
 			String dencrypedPwd = RSAUtil.decryptByPrivateKey(oldPassword, privateKey); // 解密后密码
 			String newPwd = RSAUtil.decryptByPrivateKey(newPassword, privateKey);
-			UsersVO subject = (UsersVO) SecurityUtils.getSubject().getPrincipals();
+			UsersVO subject = (UsersVO) SecurityUtils.getSubject().getPrincipal();
 			UsersVO userOld = usersService.findByAccountPassword(subject.getUserName(), dencrypedPwd);
 			if (userOld != null) {
 				userOld.setUserPassword(MD5Helper.MD5(newPwd));

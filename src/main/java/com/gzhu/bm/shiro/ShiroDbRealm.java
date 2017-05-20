@@ -52,7 +52,7 @@ public class ShiroDbRealm extends AuthorizingRealm  {
 				SimpleAuthorizationInfo sazi = new SimpleAuthorizationInfo();
 				 
 				try {	
-					UsersVO user = (UsersVO) SecurityUtils.getSubject().getPrincipals();
+			UsersVO user = (UsersVO) SecurityUtils.getSubject().getPrincipal();
 					List<String> menus = new ArrayList<String>();
 					List<String> roles = new ArrayList<String>();
 					List<BmMenuVO> userMenus= new ArrayList<>();

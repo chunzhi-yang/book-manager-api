@@ -82,9 +82,10 @@ public class BookShelfController {
 				String savedName = saveFile(file, path);
 				insertBmFiles(savedName);
 				BooksVO book = new BooksVO();
-				book.setAuthor(FileUtil.getAuthorsByFilesPath(path + File.separator + savedName));
+				String savedPath = uid.equals("-1") ? savedName : uid + File.separator + savedName;
+				book.setAuthor(FileUtil.getAuthorsByFilesPath(path+File.separator+savedName));
 				book.setBookName(fileName.substring(0,fileName.lastIndexOf(".")));
-				book.setFilePath(uid + File.separator + savedName);
+				book.setFilePath(savedPath);
 				booksService.createSelective(book);
 				book = booksService.selectByFilePath(book.getFilePath());
 				list.add(book);				
