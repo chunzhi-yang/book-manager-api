@@ -14,9 +14,11 @@
             <value>  
             	
             	/login/** = anon
-            	/app/** = logined
-            	/bookshelf/** = logined
-                /** = logined 
+            	/bookShelf/upload = anon 
+            	/bookShelf/createBatch = anon 
+            	/user/update = anon
+            	/user/upload = anon 
+                /**/**	= logined 
             </value>  
         </property> 
         <property name="filters">

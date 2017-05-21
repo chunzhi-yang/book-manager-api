@@ -2,6 +2,7 @@ package com.gzhu.bm.test;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,5 +40,13 @@ public class BmUserAccountTest {
 		bmUserAccountVO.setBmUserAccountId(1l);
 		bmUserAccountVO.setRemain(BigDecimal.valueOf(888.08));
 		Integer result = bmUserAccountService.updateByIdSelective(bmUserAccountVO);
+	}
+
+	@Test
+	public void testMatch() {
+		System.out.println(
+				Pattern.compile("/book-manager-api/+login/signin").matcher("/book-manager-api/login/signin")
+						.matches());
+
 	}
 }

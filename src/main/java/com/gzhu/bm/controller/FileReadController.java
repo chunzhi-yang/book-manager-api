@@ -74,12 +74,12 @@ public class FileReadController {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain");
 		BooksVO book = booksService.selectById(id);
-		String url = book.getBookName();
-		response.setHeader("Content-Disposition", "attachment;fileName=" + url);
+		String url = book.getFilePath();
+		response.setHeader("Content-Disposition", "attachment;fileName=" + book.getBookName());
 		logger.info("Download book, and the url is:" + url);
 		try {
 			File avatar = null;
-			avatar = FileUtil.getFile(Constants.IMG_PATH, url);
+			avatar = new File(Constants.FILE_PATH + File.separator + url);
 
 			logger.info("file path is:" + avatar.getPath());
 			InputStream inputStream = new FileInputStream(avatar);

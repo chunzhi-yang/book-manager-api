@@ -84,9 +84,10 @@ public class BookShelfController {
 				String savedName = saveFile(file, path);
 				insertBmFiles(savedName);
 				BooksVO book = new BooksVO();
-				book.setAuthor(FileUtil.getAuthorsByFilesPath(path + File.separator + savedName));
+				String savedPath = uid.equals("-1") ? savedName : uid + File.separator + savedName;
+				book.setAuthor(FileUtil.getAuthorsByFilesPath(path+File.separator+savedName));
 				book.setBookName(fileName.substring(0,fileName.lastIndexOf(".")));
-				book.setFilePath(uid + File.separator + savedName);
+				book.setFilePath(savedPath);
 				booksService.createSelective(book);
 				book = booksService.selectByFilePath(book.getFilePath());
 				list.add(book);				
@@ -119,7 +120,7 @@ public class BookShelfController {
 	
   
 //检测上传成功后将书籍记录插入表内
-	@RequestMapping(value="createBatch",method=RequestMethod.POST)
+	@RequestMapping(value = "createBatch", method = RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> create(@RequestBody BookShelfListVO vo) {
 		List<BookShelfVO> list = vo.getData();
 		for(BookShelfVO b:list){

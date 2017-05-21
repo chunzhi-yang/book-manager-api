@@ -82,7 +82,6 @@ public final class FileUtil {
 		String author = "";
 		BufferedReader  reader = null;
 		try {
-		 
 			File file = new File(path);
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 			String temp = null;
@@ -191,7 +190,6 @@ public final class FileUtil {
 			} catch (IOException e) {
 				log.error(e.getMessage(), e);
 			}
-
 		}
 	}
 
