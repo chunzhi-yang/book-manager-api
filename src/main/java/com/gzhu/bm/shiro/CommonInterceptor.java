@@ -34,7 +34,7 @@ public class CommonInterceptor implements HandlerInterceptor {
 		for (String exl : excludedUrls) {
 			if (Pattern.compile(exl).matcher(request.getRequestURI()).matches()) {
 				response.addHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-				response.addHeader("Access-Control-Allow-Methods", "*");
+				response.addHeader("Access-Control-Allow-Methods", "POST,PUT,GET,OPTIONS");
 				response.addHeader("Access-Control-Max-Age", "3600");
 				response.addHeader("Access-Control-Allow-Credentials", "true");
 				response.addHeader("Access-Control-Allow-Headers",

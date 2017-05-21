@@ -58,6 +58,8 @@
                 <value>/book-manager-api/+login/.*</value> 
             	<value>/book-manager-api/+user/upload</value>
             	<value>/book-manager-api/+bookShelf/upload</value>
+            	<value>/book-manager-api/+user/update</value>
+            	<value>/book-manager-api/+bookShelf/createBatch</value>
            </list>  
           </property>  
           </bean>  

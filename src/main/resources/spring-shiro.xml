@@ -15,6 +15,8 @@
             	
             	/login/** = anon
             	/bookShelf/upload = anon 
+            	/bookShelf/createBatch = anon 
+            	/user/update = anon
             	/user/upload = anon 
                 /**/**	= logined 
             </value>  

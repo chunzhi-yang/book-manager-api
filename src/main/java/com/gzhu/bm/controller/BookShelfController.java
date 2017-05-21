@@ -118,7 +118,7 @@ public class BookShelfController {
 	
   
 
-	@RequestMapping(value = "createBatch", method = RequestMethod.PUT)
+	@RequestMapping(value = "createBatch", method = RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> create(@RequestBody BookShelfListVO vo) {
 		List<BookShelfVO> list = vo.getData();
 		for(BookShelfVO b:list){

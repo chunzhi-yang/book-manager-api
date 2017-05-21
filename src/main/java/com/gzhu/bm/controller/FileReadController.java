@@ -78,7 +78,7 @@ public class FileReadController {
 		logger.info("Download book, and the url is:" + url);
 		try {
 			File avatar = null;
-			avatar = FileUtil.getFile(Constants.FILE_PATH, url);
+			avatar = new File(Constants.FILE_PATH + File.separator + url);
 
 			logger.info("file path is:" + avatar.getPath());
 			InputStream inputStream = new FileInputStream(avatar);
