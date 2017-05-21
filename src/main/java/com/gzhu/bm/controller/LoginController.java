@@ -55,7 +55,7 @@ public class LoginController {
 	UsersService usersService;
 	@Autowired
 	BmUserAccountService userAccountService;
-	
+	//登录的方法
 	@RequestMapping(value="signin",method=RequestMethod.POST)
 	public ResponseEntity<ResponseEnvelope<Integer>> login(HttpServletRequest request,String userName,String password,Boolean rememberMe) throws Exception{
 		ResponseEnvelope<Integer> result = new ResponseEnvelope<>();		 
@@ -82,13 +82,13 @@ public class LoginController {
 		return new ResponseEntity<>(result,HttpStatus.OK);	
 	
 	}
-	
+	//注销
 	@RequestMapping(value = "logout", method = RequestMethod.POST) 
 	public void logout() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout(); 
 	}
-	
+	//注册
 	@RequestMapping(value="signup",method=RequestMethod.POST)  
 	public ResponseEntity<ResponseEnvelope<Integer>> signup(String userName,String password,HttpServletRequest request)throws Exception{
 		ResponseEnvelope<Integer> result = new ResponseEnvelope<>();
@@ -138,7 +138,7 @@ public class LoginController {
 		bmUserAccount.setUid(uid);
 		userAccountService.createSelective(bmUserAccount);
 	}
-
+     //加载RSA加密公钥
 	@RequestMapping(value = "/getRSAPublicKey", method = RequestMethod.GET) 
 	public ResponseEntity<RSAPublicKeyVo> getRSAPublicKey(HttpServletRequest request) {
 		ServletContext sct = request.getSession().getServletContext();   

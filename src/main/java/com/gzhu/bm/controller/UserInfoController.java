@@ -45,20 +45,20 @@ public class UserInfoController {
 		file.transferTo(targetFile); 
 		return fileName;
 	}
-
+     //通过账号获取用户信息
 	@RequestMapping(value="{account}",method=RequestMethod.POST)
 	public ResponseEntity<UsersVO> getByUid(@PathVariable String account){
 		return new ResponseEntity<UsersVO>(usersService.findByAccount(account),HttpStatus.OK);
 	}
 	
-	
+	//更新信息
 	@RequestMapping(value="update",method=RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> update(@RequestBody UsersVO usersVO) {
 		Integer res = usersService.updateByPrimaryKeySelective(usersVO);  
 		JSONWrappedObject obj = new JSONWrappedObject("", "", res);
 		return new ResponseEntity<>(obj,HttpStatus.OK);
 	}
-	
+	//上传头像
 	@RequestMapping(value="upload",method=RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> upload(@RequestBody MultipartFile file) throws Exception{
 		

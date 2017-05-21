@@ -40,6 +40,7 @@ public class FileReadController {
 	public ResponseEntity<String> healthCk() {
 		return new ResponseEntity<>("UP", HttpStatus.OK);
 	}
+	//从文件服务器下载图片
 	@RequestMapping(value="downloadAvatar", method=RequestMethod.GET)
 	public void downloadAvatar(String url,HttpServletResponse response){
 		response.setCharacterEncoding("utf-8");
@@ -118,7 +119,7 @@ public class FileReadController {
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
-
+//提取章节
 	@RequestMapping(value = "bookWithChapters", method = RequestMethod.POST)
 	public ResponseEntity<List<ChapterVO>> getChapters(@RequestParam String fileName)
 			throws BizException {
@@ -133,7 +134,7 @@ public class FileReadController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
-
+//拿取其中一章的内容
 	@RequestMapping(value = "getOneChapter", method = RequestMethod.POST)
 	public ResponseEntity<String> getOneChapterByFileName(@RequestParam String fileName)
 			throws BizException {

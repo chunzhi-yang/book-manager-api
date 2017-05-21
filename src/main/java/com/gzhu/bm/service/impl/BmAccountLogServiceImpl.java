@@ -12,7 +12,7 @@ import com.gzhu.bm.repo.util.PaginationBean;
 import com.gzhu.bm.service.BmAccountLogService;
 import com.gzhu.bm.util.BeanMapper;
 import com.gzhu.bm.vo.BmAccountLogVO;
-
+//实现类
 @Service
 public class BmAccountLogServiceImpl implements BmAccountLogService {
 

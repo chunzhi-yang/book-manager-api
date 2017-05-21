@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
+//跨域拦截器
 public class CommonInterceptor implements HandlerInterceptor {  
   
     private List<String> excludedUrls;  

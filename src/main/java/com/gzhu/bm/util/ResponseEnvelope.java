@@ -3,7 +3,7 @@ package com.gzhu.bm.util;
 public class ResponseEnvelope<T> implements java.io.Serializable {
 	
 	/**
-	 * 
+	 * 请求的返回结果的包装类，无论失败与否
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean success;

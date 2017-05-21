@@ -45,6 +45,7 @@ public class BookShelfController {
 	@Autowired
 	BooksService booksService;
 	
+	//查书架上面的书
 	@RequestMapping(value="list/{uid}",method=RequestMethod.POST)
 	public ResponseEntity<PaginationBean<BookShelfVO>> getList(@PathVariable String uid,
 			@RequestParam(value = "page", defaultValue = "1") int page,
@@ -61,6 +62,7 @@ public class BookShelfController {
 		return new ResponseEntity<>(paginationBean,HttpStatus.OK);
 	}
 	
+	//上传书到服务器方便处理
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> upload(HttpServletRequest request,HttpServletResponse resp) throws Exception {
 		 CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
@@ -116,7 +118,7 @@ public class BookShelfController {
 	}
 	
   
-
+//检测上传成功后将书籍记录插入表内
 	@RequestMapping(value="createBatch",method=RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> create(@RequestBody BookShelfListVO vo) {
 		List<BookShelfVO> list = vo.getData();

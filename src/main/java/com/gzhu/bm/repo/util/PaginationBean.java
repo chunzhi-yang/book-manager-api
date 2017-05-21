@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PaginationBean<T> implements java.io.Serializable {
 	
-	
+	//分页的工具类
 	/**
 	 * 
 	 */

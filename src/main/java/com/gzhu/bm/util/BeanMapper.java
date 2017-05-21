@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
-
+//进行对象转换的工具类
 public class BeanMapper {
 	
 	private static DozerBeanMapper mapper = new DozerBeanMapper();
