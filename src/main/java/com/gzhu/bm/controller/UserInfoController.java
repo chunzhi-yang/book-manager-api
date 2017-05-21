@@ -71,7 +71,7 @@ public class UserInfoController {
 		JSONWrappedObject obj = new JSONWrappedObject("", "", res);
 		return new ResponseEntity<>(obj,HttpStatus.OK);
 	}
-	//上传头像
+	
 	@RequestMapping(value = "updatePassword", method = RequestMethod.POST)
 	public ResponseEntity<ResponseEnvelope<Integer>> updatePassword(HttpServletRequest request,
 			@RequestParam String oldPassword, @RequestParam String newPassword) {
@@ -87,11 +87,12 @@ public class UserInfoController {
 			String dencrypedPwd = RSAUtil.decryptByPrivateKey(oldPassword, privateKey); // 解密后密码
 			String newPwd = RSAUtil.decryptByPrivateKey(newPassword, privateKey);
 			UsersVO subject = (UsersVO) SecurityUtils.getSubject().getPrincipal();
-			UsersVO userOld = usersService.findByAccountPassword(subject.getUserName(), dencrypedPwd);
+			UsersVO userOld = usersService.findByAccountPassword(subject.getUserName(), MD5Helper.MD5(dencrypedPwd));
 			if (userOld != null) {
 				userOld.setUserPassword(MD5Helper.MD5(newPwd));
+				usersService.updateByPrimaryKeySelective(userOld);
 				result.setSuccess(true);
-			}
+			}			 
 			result.setMessage("密码错误!");
 			result.setSuccess(false);
 		} catch (Exception e) { 
@@ -102,6 +103,7 @@ public class UserInfoController {
 
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+	//上传头像
 	@RequestMapping(value="upload",method=RequestMethod.POST)
 	public ResponseEntity<JSONWrappedObject> upload(@RequestBody MultipartFile file) throws Exception{
 		
